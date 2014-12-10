@@ -572,10 +572,10 @@ class AjaxView{
     <option value="POST">POST</option>
 </select>
 <input type="text" id="url" placeholder="please input url.." style="width: 80em"
-       onchange="javascript:split_url()" value="<?=$params['url']?>" />
+       onchange="javascript:split_url()" value="<?php echo$params['url']?>" />
 <br/>
 <label>With parameters:</label><br/>
-<textarea id="param"  rows="15" onchange="auto_expand(this);"><?=$params['params']?></textarea> <br/>
+<textarea id="param"  rows="15" onchange="auto_expand(this);"><?php echo$params['params']?></textarea> <br/>
 <input type="button" value="SEND" onclick="javascript:send_request();" />
 <input type="button" value="Split URL" onclick="javascript:split_url();" />
 <input type="button" value="Decode PARAM" onclick="javascript:decode_param();" />

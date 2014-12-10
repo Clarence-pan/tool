@@ -35,7 +35,7 @@
         <h1>Ajax Tool</h1>
     </div>
     <div class="body" align="center">
-        <?= $content ?>
+        <?php echo $content ?>
     </div>
     <div class="footer" align="center">
         <hr/>

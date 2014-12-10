@@ -26,11 +26,18 @@ function get_relative_path($file){
     }
     return $file;
 }
-
+function get_file_ext($file){
+    $parts = explode('.', $file);
+    return end($parts);
+}
 function extend_php_short_tag($inFile, $outFile){
+    if (strtolower(get_file_ext($inFile)) != 'php'){
+        return;
+    }
     $fileContent = file_get_contents($inFile);
     if ($fileContent){
-        $fileContent = str_replace('<?', '<?php', $fileContent);
+        echo 'process '.$inFile.NEW_LINE;
+        $fileContent = str_replace('<?php', '<?php', $fileContent);
         $fileContent = str_replace('<?php=', '<?php echo', $fileContent);
         $fileContent = str_replace('<?phpphp', '<?php', $fileContent);
         file_put_contents($outFile, $fileContent);

@@ -1,5 +1,44 @@
+#!/usr/bin/env php
 <?php
 
-list($exe, $file) = $argv;
+define('NEW_LINE', "\n");
 
-if (!$file)
+
+function scan_dir($pwd, $action){
+//    echo 'Enter '.$pwd.NEW_LINE;
+    $files = scandir($pwd);
+    foreach ($files as $file) {
+        $fileFullName = get_relative_path("$pwd/$file");
+        if (!in_array($file, array('.', '..', '.git', '.svn'))){
+            call_user_func($action, $fileFullName, $pwd, $file);
+            if (is_dir($fileFullName)){
+                scan_dir($fileFullName, $action);
+            }
+        }
+    }
+//    echo "Leave $pwd".NEW_LINE;
+}
+
+function get_relative_path($file){
+    global $currentWorkingDir;
+    if (strpos($file, $currentWorkingDir) === 0){
+        return substr($file, strlen($currentWorkingDir) + 1);
+    }
+    return $file;
+}
+
+function extend_php_short_tag($inFile, $outFile){
+    $fileContent = file_get_contents($inFile);
+    if ($fileContent){
+        $fileContent = str_replace('<?', '<?php', $fileContent);
+        $fileContent = str_replace('<?php=', '<?php echo', $fileContent);
+        $fileContent = str_replace('<?phpphp', '<?php', $fileContent);
+        file_put_contents($outFile, $fileContent);
+    }
+}
+
+$pwd = getcwd();
+
+scan_dir($pwd, function($file){
+    extend_php_short_tag($file, $file);
+});

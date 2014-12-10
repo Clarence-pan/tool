@@ -36,4 +36,3 @@ $result = array(
 );
 $result[a.id][b.id]
 
-

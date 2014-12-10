@@ -102,7 +102,7 @@
         self.options = $.extend(self, defaultOptions, options);
         var data = self.data = self.data || {};
         var root = self.root = create_json_node(self.json);
-        root.prependTo(self.renderTo);
+        root.appendTo(self.renderTo.empty());
         initExpander($('dt',self.renderTo));
         return this;
     }

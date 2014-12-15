@@ -43,44 +43,74 @@
             padding: 0.5em;
             border: whitesmoke 1px solid;
         }
-        #log-item-template{
+        #log-item-template-wrapper{
             display: none;
         }
         .log-item .delBtn{
             margin-left: 4em;
         }
+        .param{
+            max-width: 90vw;
+            word-wrap: break-word;
+            white-space: normal;
+        }
     </style>
 </head>
 <body>
-    <select id="method" >
-        <option value="GET">GET</option>
-        <option value="POST">POST</option>
-    </select>
-    <input type="text" id="url" placeholder="please input url.." style="width: 80em"
-           onchange="javascript:split_url()" />
-    <br/>
-    <label>With parameters:</label><br/>
-    <textarea id="param"  rows="15" onchange="auto_expand(this);"></textarea> <br/>
-    <input type="button" value="SEND" onclick="javascript:send_request();" />
-    <input type="button" value="Split URL" onclick="javascript:split_url();" />
-    <input type="button" value="Decode PARAM" onclick="javascript:decode_param();" />
-    <input type="button" value="Encode PARAM" onclick="javascript:encode_param();" />
-    <input type="button" value="Undo" onclick="javascript:undo_it();" title="Are your regretting? Click here to undo it." />
-    <input type="button" value="Redo" onclick="javascript:redo_it();" title="Are your regretting of having undone something? Click here to redo it." />
-    <br/>
-    <div id="output" class="" style="display: none">
-        <h2>Ouput:</h2>
-        <h3>Pretty JSON:</h3>
-        <div id="json-output" class="json output"></div>
-        <h3>After base64 decode:</h3>
-        <div id="base64-output" class="base64 output"></div>
-        <h3>Raw:</h3>
-        <div id="raw-output" class="raw output"></div>
-    </div>
-    <hr/>
-    <h2>History:</h2>
-    <div id="log">
+    <!--<div>-->
+        <!--<p style="cursor: auto">auto</p>-->
+        <!--<p style="cursor: alias">alias</p>-->
+        <!--<p style="cursor: all-scroll">all-scroll</p>-->
+        <!--<p style="cursor: not-allowed">not-allowed</p>-->
+        <!--<p style="cursor: crosshair">crosshair</p>-->
+        <!--<p style="cursor: default">default</p>-->
+        <!--<p style="cursor: hand">hand</p>-->
+        <!--<p style="cursor: vertical-text">vertical-text</p>-->
+        <!--<p style="cursor: wait">wait</p>-->
+        <!--<p style="cursor: cell">cell</p>-->
+        <!--<p style="cursor: col-resize">col-resize</p>-->
+        <!--<p style="cursor: context-menu">context-menu</p>-->
+        <!--<p style="cursor: copy">copy</p>-->
+        <!--<p style="cursor: no-drop">no-drop</p>-->
+        <!--<p style="cursor: e-resize">e-resize</p>-->
+        <!--<p style="cursor: ew-resize">ew-resize</p>-->
+        <!--<p style="cursor: move">move</p>-->
+        <!--<p style="cursor: none">none</p>-->
+        <!--<p style="cursor: help">help</p>-->
+        <!--<p style="cursor: inherit">inherit</p>-->
+        <!--<p style="cursor: progress">progress</p>-->
+    <!--</div>-->
+    <div>
+        <select id="method" >
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+        </select>
+        <input type="text" id="url" placeholder="please input url.." style="width: 80em"
+               onchange="javascript:split_url()" />
+        <br/>
+        <label>With parameters:</label><br/>
+        <textarea id="param"  rows="15" onchange="auto_expand(this);"></textarea> <br/>
+        <input type="button" value="SEND" onclick="javascript:send_request();" />
+        <input type="button" value="Split URL" onclick="javascript:split_url();" />
+        <input type="button" value="Decode PARAM" onclick="javascript:decode_param();" />
+        <input type="button" value="Encode PARAM" onclick="javascript:encode_param();" />
+        <input type="button" value="Undo" onclick="javascript:undo_it();" title="Are your regretting? Click here to undo it." />
+        <input type="button" value="Redo" onclick="javascript:redo_it();" title="Are your regretting of having undone something? Click here to redo it." />
+        <br/>
+        <div id="output" class="" style="display: none">
+            <h2>Ouput:</h2>
+            <h3>Pretty JSON:</h3>
+            <div id="json-output" class="json output"></div>
+            <h3>After base64 decode:</h3>
+            <div id="base64-output" class="base64 output"></div>
+            <h3>Raw:</h3>
+            <div id="raw-output" class="raw output"></div>
+        </div>
+        <hr/>
+        <h2>History:</h2>
+        <div id="log">
 
+        </div>
     </div>
     <script type="text/javascript" src="js/jquery.js" ></script>
     <script type="text/javascript" src="js/external/jquery.indexeddb.js" ></script>
@@ -234,6 +264,8 @@
                 }
                 console.log(" Ajax failed: %o, %o (%o)", msg, this, arguments);
                 $("#raw-output").text(" Ajax failed: " + msg);
+            }).progress(function(){
+                console.log('progress: %o', arguments);
             });
         }
         function clear_output(){
@@ -471,6 +503,7 @@
         });
 
     </script>
+    <div id="log-item-template-wrapper" style="display: none">
     <div id="log-item-template" class="log-item">
         <div>LOG ID: <span class="id"></span><input type="button" class="delBtn" value="DELETE" /></div>
         <h3>Request</h3>
@@ -496,6 +529,7 @@
             <h4>RAW</h4>
             <p class="raw"></p>
         </div>
+    </div>
     </div>
 </body>
 </html>

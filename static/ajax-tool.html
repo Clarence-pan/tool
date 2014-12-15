@@ -297,7 +297,7 @@
             log_it({ base64: base64, json: json, jsonPretty: jsonPretty, raw: output }, request);
         }
 
-        function render_and_prepend_log(data) {
+        function render_and_prepend_log(data, noJumpToNewLogItem) {
             var uiLogItemId = 'log-' + data.id;
             var logItem = $('#log-item-template').clone().removeAttr('id').attr('id', uiLogItemId);
             logItem.find('.request .type').text(data.request.type);
@@ -321,7 +321,9 @@
                 logItem.remove();
             });
             logItem.prependTo('#log');
-            location.hash = '#' + uiLogItemId;
+            if (!noJumpToNewLogItem){
+                location.hash = '#' + uiLogItemId;
+            }
             logItem.find('h3,h4').initExpander(true);
         }
         function log_it(response, request){
@@ -336,7 +338,7 @@
 
         function load_log_items(){
             logItemDb.each(function(item){
-                render_and_prepend_log(item);
+                render_and_prepend_log(item, true);
             });
         }
 

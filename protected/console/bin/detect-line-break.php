@@ -59,4 +59,3 @@ detect_dir($currentWorkingDir);
 
 
 
-

@@ -33,7 +33,7 @@ class Controller {
         $layout = $this->getLayout();
         if ($layout){
             $content = $this->renderPartial($view, $params, true);
-            return $this->renderPartial($layout, array_merge($params, array('content' => $content)), $return);
+            return $this->renderPartial($layout, array_merge($params, array('title' => $this->getTitle(), 'content' => $content)), $return);
         } else {
             return $this->renderPartial($view, $params, $return);
         }
@@ -72,7 +72,7 @@ class Controller {
 
     }
 
-    private $layout = 'layout/main';
+    private $layout = '../../layout/main';
 
     /**
      * 设置布局
@@ -89,4 +89,21 @@ class Controller {
     public function getLayout(){
         return $this->layout;
     }
-} 
+
+    private $title = '';
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle() {
+        return $this->title;
+    }
+
+}

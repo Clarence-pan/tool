@@ -38,8 +38,8 @@ function extend_php_short_tag($inFile, $outFile){
     if ($fileContent){
         echo 'process '.$inFile.NEW_LINE;
         $fileContent = str_replace('<?php', '<?php', $fileContent);
-        $fileContent = str_replace('<?php=', '<?php echo', $fileContent);
-        $fileContent = str_replace('<?phpphp', '<?php', $fileContent);
+        $fileContent = str_replace('<?php echo', '<?php echo', $fileContent);
+        $fileContent = str_replace('<?php', '<?php', $fileContent);
         file_put_contents($outFile, $fileContent);
     }
 }

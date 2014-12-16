@@ -7,7 +7,7 @@
  */
 namespace{
     ini_set('display_errors', 'on');
-    error_reporting(E_ALL | E_STRICT);
+    error_reporting(E_ALL ^ E_STRICT ^ E_NOTICE);
 
     function is_debug_enable(){
         return true;

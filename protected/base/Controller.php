@@ -76,7 +76,7 @@ class Controller {
 
     /**
      * 设置布局
-     * @param $layout
+     * @param $layout string 如果为空，则无布局
      */
     public function setLayout($layout){
         $this->layout = $layout;

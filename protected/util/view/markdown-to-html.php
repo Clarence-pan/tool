@@ -1,2 +1,3 @@
-<?php
- echo $html;
+<article>
+<?php echo $html; ?>
+</article>

@@ -18,25 +18,41 @@
             left: 0;
             right: 0;
         }
+        form#toHtml{
+            position: relative;
+            top: 0;
+            width: 10em;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 <body>
 <pre id="editor"></pre>
-
+<form id="toHtml" action="/util/markdown/toHtml" method="post" enctype="multipart/form-data" target="_blank">
+    <input type="hidden" name="markdown" value="" />
+    <button onclick="beforeToHtml()">
+        To HTML
+    </button>
+</form>
 <script src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    function beforeToHtml(){
+        $('[name=markdown]').val(aceEditor.getValue());
+    }
     $(function(){
         // load editor content
         $("#editor").html(localStorage.editorContent);
 
         // init ace editor
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/textmate");
-        editor.getSession().setMode("ace/mode/markdown");
+        var aceEditor = ace.edit("editor");
+        aceEditor.setTheme("ace/theme/textmate");
+        aceEditor.getSession().setMode("ace/mode/markdown");
+        window.aceEditor = aceEditor;
 
         // set auto saving
         setInterval(function(){
-            localStorage.editorContent = editor.getValue()
+            localStorage.editorContent = aceEditor.getValue()
         }, 3000);
     });
 </script>

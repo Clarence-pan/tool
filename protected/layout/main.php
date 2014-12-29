@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type"  />
-    <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
     <script src="/static/js/jquery.js" ></script>
     <script src="/static/js/bootstrap.js"></script>
     <title><?php echo $title ?></title>

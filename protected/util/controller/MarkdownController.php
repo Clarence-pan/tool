@@ -14,6 +14,7 @@ class MarkdownController extends Controller{
     }
 
     private function toHtml($markdown){
-        return $markdown;
+        $m = new \tool\util\model\Markdown($markdown);
+        return $m->toHtml();
     }
 } 

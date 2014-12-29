@@ -10,9 +10,12 @@ class EvalController extends Controller{
     }
 
     public function doGetView($param){
-        $this->render('eval', array('code' => $param['code']));
+        return $this->doPostEval($param);
+    }
+    public function doPostView($param){
+        return $this->doPostEval($param);
     }
     public function doPostEval($param){
-        $this->render('eval', array('code' => $param['code']));
+        return $this->render('eval', array('code' => $param['code']));
     }
 } 

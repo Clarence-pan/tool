@@ -25,7 +25,7 @@
 <div id="code">
 <form target="_self" method="post" id="eval_form" action="#result" >
     <textarea id="code" name="code" rows="10"
-              placeholder="Input what to eval..." onchange="javascript:eval_form_submit();"
+              placeholder="Input what to eval..." onchange=""
         ><?php echo $code ?></textarea>
     <br/>
     <input type="submit" value="EVAL IT" />

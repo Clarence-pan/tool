@@ -15,3 +15,9 @@ body{
     min-height: 70vh;
 }
 
+code{
+    white-space: pre;
+}
+p{
+    white-space: pre;
+}

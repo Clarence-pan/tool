@@ -10,7 +10,7 @@ namespace{
     error_reporting(E_ALL ^ E_STRICT ^ E_NOTICE);
 
     function is_debug_enable(){
-        return true;
+        return false;
     }
 
     function debug($msg){
@@ -60,10 +60,22 @@ namespace tool{
 
     spl_autoload_register('\tool\auto_load');
 
+    function get_relative_uri($uri, $baseUri=null)
+    {
+		if (!$baseUri){
+			$baseUri = dirname($_SERVER["SCRIPT_NAME"]);
+		}
+		if (strpos($uri, $baseUri) === 0){
+			return substr($uri, strlen($baseUri));
+		}
+		return $uri;
+	}
+
 
     class Main{
 
         public static function run($config){
+			debug('run with GET: ', $_GET, ' POST: ', $_POST);
             $instance = new self($config);
             return $instance->process();
         }
@@ -74,7 +86,9 @@ namespace tool{
         }
 
         public function process(){
-            return $this->dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_GET, $_POST, $_COOKIE);
+            debug('server: ', $_SERVER);
+			$uri = get_relative_uri($_SERVER['REQUEST_URI']); 
+            return $this->dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $uri, $_GET, $_POST, $_COOKIE);
         }
 
         private $config;

@@ -39,6 +39,7 @@ namespace tool\base{
             if (self::$GET_DISPATCH_PATH_ENABLE && in_array(left_of('?', $uri), array('', '/', '/index.php'))){
                 $uri = $get['d'];
             }
+			debug('uri:', $uri);
             $url = left_of('?', $uri);
             foreach ($this->route as $path => $methods) {
                 $realPathPattern = $methods[$method];

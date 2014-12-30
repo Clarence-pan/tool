@@ -76,13 +76,8 @@ namespace tool{
 
         public static function run($config){
 			debug('run with GET: ', $_GET, ' POST: ', $_POST);
-			try{
-            	$instance = new self($config);
-            	return $instance->process();
-			}catch(\Exception $e){
-				debug("Got an exception: ", $e);
-				echo "Something is wrong... Please wait a minute. It shall be dealed soon.";
-			}
+            $instance = new self($config);
+            return $instance->process();
         }
 
         public function __construct($config){

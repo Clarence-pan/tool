@@ -50,8 +50,13 @@
         $('[name=markdown]').val(aceEditor.getValue());
     }
     $(function(){
+        function getNoteName(){
+            var hash = location.hash.substring(1);
+            return 'content_' + ( hash || 'default');
+        }
+
         // load editor content
-        $("#editor").text(localStorage.editorContent);
+        $("#editor").text(localStorage[getNoteName()]);
 
         // init ace editor
         var aceEditor = ace.edit("editor");
@@ -61,7 +66,7 @@
 
         // set auto saving
         setInterval(function(){
-            localStorage.editorContent = aceEditor.getValue()
+            localStorage[getNoteName()] = aceEditor.getValue()
         }, 3000);
     });
 </script>

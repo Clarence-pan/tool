@@ -68,6 +68,10 @@
         setInterval(function(){
             localStorage[getNoteName()] = aceEditor.getValue()
         }, 3000);
+
+        window.onhashchange = function(){
+            window.location.reload();
+        }
     });
 </script>
 </body>

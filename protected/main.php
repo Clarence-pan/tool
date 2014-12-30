@@ -10,7 +10,7 @@ namespace{
     error_reporting(E_ALL ^ E_STRICT ^ E_NOTICE);
 
     function is_debug_enable(){
-        return true;
+        return false;
     }
 
     function debug($msg){

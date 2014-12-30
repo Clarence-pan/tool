@@ -65,7 +65,7 @@ namespace tool{
 		if (!$baseUri){
 			$baseUri = dirname($_SERVER["SCRIPT_NAME"]);
 		}
-		if (strpos($uri, $baseUri) === 0){
+		if (strpos($uri, $baseUri) === 0 && $baseUri != '/'){
 			return substr($uri, strlen($baseUri));
 		}
 		return $uri;

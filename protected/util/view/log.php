@@ -166,11 +166,7 @@ if (@$_REQUEST['clear']){
 <?PHP if(!@$_REQUEST["autoAppend"]){ ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<script type='text/javascript' src='js/jquery.js'></script>
-<!--
-<script type='text/javascript' src='js/jquery.autocomplete.js'></script>
-<script type="text/javascript" src="js/jquery-ui/jquery-ui.js" >    </script>
--->
+<script type='text/javascript' src='/static/js/jquery.js'></script>
 <script type="text/javascript">
         function showStackTrace(title){
             $(title).siblings('.stackTrace').toggle();

@@ -2,14 +2,14 @@
 <?php session_start(); ?>
 <html>
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="content-type"  />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" >
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
     <script src="/static/js/jquery.js" ></script>
     <script src="/static/js/bootstrap.js"></script>
     <title><?php echo $title ?></title>
 </head>
-<body>
+<body lang="cn">
 <div class="container">
 <div class="panel">
 <div class="panel-heading" align="center">

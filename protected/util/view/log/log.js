@@ -115,8 +115,11 @@ function showInNewWindow(e){
     }
 }
 function expandThisCell(e){
-    $(e).toggleClass('fixed-height');
-    window.scrollTo(0, $(e).offset().top + 30);
+    var top = $(e).toggleClass('fixed-height').offset().top;
+    // 如果滚动得超过窗口范围了，自动滚回去
+    if (window.scrollY > top ){
+        window.scrollTo(0, top - 30);
+    }
 }
 function toggle_very_brief(v){
     $('.line, .level, .category, .time').toggle(!v);

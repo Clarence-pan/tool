@@ -116,6 +116,7 @@ function showInNewWindow(e){
 }
 function expandThisCell(e){
     $(e).toggleClass('fixed-height');
+    window.scrollTo(0, $(e).offset().top + 30);
 }
 function toggle_very_brief(v){
     $('.line, .level, .category, .time').toggle(!v);

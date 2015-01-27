@@ -129,7 +129,7 @@ function filterLog($logLine){
      * @var $msgBody string
      */
     extract($logLine);
-    if ($category == 'application' and strpos($msgHead, 'CWebApplication created for') === 0){
+    if ($category == 'CWebApplication' ){
         return false;
     }
     if ($category == 'application' and strpos($msgHead, 'REST API 外部接口调用') === 0){
@@ -437,6 +437,7 @@ if (@$_REQUEST['clear']){
         <input type="button" onclick="scrollToTop()" value="Top" />
         <input type="button" onclick="scrollToBottom()" value="Bottom" />
         <a href="view">View All</a>
+
     </form>
 </div>
 <?php }?>

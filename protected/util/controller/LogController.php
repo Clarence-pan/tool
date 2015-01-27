@@ -4,6 +4,7 @@ namespace tool\util\controller;
 ini_set('display_errors', 'on');
 error_reporting(E_ALL ^ E_STRICT );
 use tool\base\Controller as Controller;
+use tool\util\model\log\CacheLog;
 
 class LogController extends Controller {
 
@@ -39,11 +40,11 @@ class LogController extends Controller {
         if ($key !== null){
             $displayKey($key);
         } else {
-            $num = $cacheLog->getCache('log-item-num');
+            $num = $cacheLog->count();
             echo "<h2>Total log item number: $num</h2>".PHP_EOL;
             for ($i = 0; $i < $num; $i++){
                 echo "<h3>LOG#$i</h3>".PHP_EOL;
-                $displayKey('log-item-'.$i);
+                $displayKey(CacheLog::LOG_ITEM_PREFIX.$i);
             }
         }
     }

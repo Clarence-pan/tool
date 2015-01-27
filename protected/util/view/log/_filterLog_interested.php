@@ -1,10 +1,10 @@
 <?php
 
-function filterLog($logLine){
+function filterLog($logItem){
     if (!@$_REQUEST['noFilterDbProfile']
-        && $logLine['level'] == 'profile'
-        && in_array($logLine['category'], array('system.db.CDbCommand.query', 'system.db.CDbCommand.execute'))
-        && in_array($logLine['msgHead'], array('begin', 'end'))){
+        && $logItem['level'] == 'profile'
+        && in_array($logItem['category'], array('system.db.CDbCommand.query', 'system.db.CDbCommand.execute'))
+        && in_array($logItem['msgHead'], array('begin', 'end'))){
         return true;
     }
     /**
@@ -13,7 +13,7 @@ function filterLog($logLine){
      * @var $msgBody string
      * @var $request string
      */
-    extract($logLine);
+    extract($logItem);
     if ($category == 'CWebApplication' ){
         return false;
     }

@@ -4,36 +4,37 @@
  * @var $content string The content of layout.
  * @var $filter string  Log filter name
  */
-function get_style_of_request($request){
+function get_style_of_request($request) {
     $colors = explode(' ', '#ffffff #ffddff #ddffff #ffffdd #ddddff #ddffdd #ffdddd #dddddd');
     static $requests = array();
-    if (!array_key_exists($request, $requests)){
+    if (!array_key_exists($request, $requests)) {
         $i = count($requests);
         $requests[$request] = $i;
-    }else{
+    } else {
         $i = $requests[$request];
     }
     $i = $i % count($colors);
-    return 'background-color: '.$colors[$i];
+
+    return 'background-color: ' . $colors[$i];
 }
 
-function output_logs($log, $id=100000){
-    for ($logline = $log->next(); $logline; $logline = $log->next(), $id++): /* id="<?php echo $id?>" */
-        if (filterLog($logline)){
+function output_logs(\tool\util\model\log\ILog $log, $id = 100000) {
+    for ($item = $log->next(); $item; $item = $log->next(), $id++):
+        if (filterLog($item)) {
             continue;
         }
         ?>
-        <ul  class="log" style="<?php echo get_style_of_request($logline['request'])?>">
-            <li class="line"><?php echo  $id + 1 ?>:</li>
-            <?php foreach ($logline as $key => $logValue): ?>
-                <li class="<?php echo  $key ?>"
-                    <?php if ($key == 'msgBody'){ ?>
-                        ondblclick="javascript:showInNewWindow(this);"
-                        onclick="javascript:expandThisCell(this)"
-                    <?php }else if ($key == 'msgHead' || $key == 'category' || $key == 'level'){ ?>
-                        ondblclick="javascript:showStackTrace(this);"
+        <ul class="log" style="<?php echo get_style_of_request($item['request']) ?>">
+            <li class="line"><?php echo $id + 1 ?>:</li>
+            <?php foreach ($item as $key => $logValue): ?>
+                <li class="<?php echo $key ?>"
+                    <?php if ($key == 'msgBody') { ?>
+                        ondblclick="showInNewWindow(this);"
+                        onclick="expandThisCell(this)"
+                    <?php } else if ($key == 'msgHead' || $key == 'category' || $key == 'level') { ?>
+                        ondblclick="showStackTrace(this);"
                     <?php } ?>
-                    ><?php echo  htmlspecialchars($logValue) ?></li>
+                    ><?php echo htmlspecialchars($logValue) ?></li>
             <?php endforeach; ?>
         </ul>
         <?PHP if ($id % 200 == 0): ?>
@@ -42,16 +43,17 @@ function output_logs($log, $id=100000){
         </script>
     <?PHP endif;
     endfor;
+
     return $id;
 }
 
 $filter = ((isset($filter) and $filter) ? $filter : 'basic');
-require(__DIR__."/_filterLog_$filter.php");
+require(__DIR__ . "/_filterLog_$filter.php");
 
-if(!@$_REQUEST["autoAppend"]){
+if (!@$_REQUEST["autoAppend"]) {
     $this->renderPartial('log/_html_header');
-    if ($filter != 'basic'){
-        $links =  array('view' => 'View All');
+    if ($filter != 'basic') {
+        $links = array('view' => 'View All');
     } else {
         $links = array('interested' => 'interested');
     }
@@ -59,21 +61,21 @@ if(!@$_REQUEST["autoAppend"]){
 }
 
 $log = new \tool\util\model\log\CacheLog();
-if (@$_REQUEST['clear']){
-    if (@$_REQUEST['clear'] >= $log->fileSize || @$_REQUEST['clear'] == 'all') {
+if (@$_REQUEST['clear']) {
+    if (@$_REQUEST['clear'] >= $log->count() || @$_REQUEST['clear'] == 'all') {
         $log->clear();
         echo "Clear finished!";
+
         return;
-    }else{
+    } else {
         echo "Already cleared! The following is new one: ";
     }
 }
 
-
-if (@$_REQUEST['seek']){
+if (@$_REQUEST['seek']) {
     $log->seek(intval(@$_REQUEST['seek']));
 }
-$id =  @$_REQUEST["id"];
+$id = @$_REQUEST["id"];
 $id = $id ? $id : 0;
 $id = output_logs($log, $id);
 

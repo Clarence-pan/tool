@@ -436,6 +436,7 @@ if (@$_REQUEST['clear']){
         <input type="button" onclick="window.stopAutoAppend = true" value="Stop auto append" />
         <input type="button" onclick="scrollToTop()" value="Top" />
         <input type="button" onclick="scrollToBottom()" value="Bottom" />
+        <a href="view">View All</a>
     </form>
 </div>
 <?php }?>

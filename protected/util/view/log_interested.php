@@ -102,6 +102,9 @@ class CacheLog{
             return null;
         }
         $item = $this->cache->get("log-item-$next");
+        if ($item == false){
+            throw new Exception('log item missing! '.$next);
+        }
 //        var_dump($item);
         return $item;
     }
@@ -127,6 +130,7 @@ function filterLog($logLine){
      * @var $category string
      * @var $msgHead string
      * @var $msgBody string
+     * @var $request string
      */
     extract($logLine);
     if ($category == 'CWebApplication' ){
@@ -146,13 +150,26 @@ function filterLog($logLine){
     }
     return true;
 }
+
+function get_style_of_request($request){
+    $colors = explode(' ', '#ffffff #ffddff #ddffff #ffffdd #ddddff #ddffdd #ffdddd #dddddd');
+    static $requests = array();
+    if (!array_key_exists($request, $requests)){
+        $i = count($requests);
+        $requests[$request] = $i;
+    }else{
+        $i = $requests[$request];
+    }
+    $i = $i % count($colors);
+    return 'background-color: '.$colors[$i];
+}
 function output_logs($log, $id=100000){
     for ($logline = $log->next(); $logline; $logline = $log->next(), $id++): /* id="<?php echo $id?>" */
         if (filterLog($logline)){
             continue;
         }
         ?>
-        <ul  class="log">
+        <ul  class="log" style="<?php echo get_style_of_request($logline['request'])?>">
             <li class="line"><?php echo  $id + 1 ?>:</li>
             <?php foreach ($logline as $key => $logValue): ?>
                 <li class="<?php echo  $key ?>"
@@ -399,7 +416,10 @@ if (@$_REQUEST['clear']){
         color: black;
         max-height: 8em;
         max-width: 90vw;
-        overflow: auto;
+        overflow: hidden;
+    }
+    li.request{
+        display: none;
     }
     li.fixed-height{
         max-height: initial !important;

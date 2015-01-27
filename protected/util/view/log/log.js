@@ -116,26 +116,96 @@ function showInNewWindow(e){
     }
 }
 function bindExpander(code){
-    var lines = code.html().split('\n');
-    code.empty();
-    for (var i = 0; i < lines.length; i++){
-        var line = lines[i];
-        var p = $('<p></p>').text(line).addClass('intend-'+findFirstNonBlankPos(line));
-        p.html(p.html().replace('(', '<span class="expander-open">(</span>').replace(')', '<span class="expander-close">)</span>'))
-        code.append(p);
+    if (!code.text().trim().match(/array/i)){
+        return;
     }
+//    var css = document.createElement('style');
+//    css.innerHTML = '.expander-open,.expander-close{ color: blue; }';
+//    code.closest('document')[0].head.prependChild(css);
+
+	(function(){
+		var lines = code.text().split('\n');
+		code.empty();
+		for (var i = 0; i < lines.length; i++){
+			var line = lines[i];
+			var intendClass = 'intend-'+findFirstNonBlankPos(line);
+			var line = $('<div class="line"></div>').text(line).attr('data-intend-class', intendClass).addClass(intendClass);
+			line.html(line.html().replace('(', '<span class="expander-open">(</span>').replace(')', '<span class="expander-close">)</span>').replace('array', '<span class="expander-array">array</span>'));
+			code.append(line);
+		}
+	})();
+	var expanderCss = {
+        color: 'blue',
+        'padding-right': '2em',
+		'margin-right': '-2em',
+        'padding-left': '2em',
+        'margin-left': '-2em',
+        cursor: 'pointer'
+    };
+    code.find('.expander-open, .expander-close, .expander-array').css(expanderCss);
+	code.delegate('.expander-array', 'click', function(){
+		var opener = $(this).closest('.line').next().find('.expander-open:eq(0)');
+		if (opener.is(':visible')){
+			opener.trigger('click');
+		}else{
+			$(this).next().trigger('click');
+		}
+	});
+	code.delegate('.expander-close', 'click', function(){
+		var line = $(this).closest('.line');
+		var opener = findNextDired(line, 'prev', '.' + line.attr('data-intend-class')).find('.expander-open:eq(0)');
+		opener.trigger('click');
+	});
     code.delegate('.expander-open', 'click', function(){
         var $this = $(this);
-        var p = $this.closest('p');
-        var thisIntend = p.attr('class');
-        p.nextUntil(thisIntend).toggle();
+        var line = $this.closest('.line');
+		var prevLine = findNextDired(line, 'prev', '.line');
+        var thisClass = '.' + line.attr('data-intend-class');
+        var content = line.nextUntil(thisClass);
+        var endPos = findNextDired(line, 'next', thisClass);
+		if (!line.data('wrapper')){
+			var wrapper = $('<div class="wrapper"></div>').insertBefore(line);
+			wrapper.append(line).append(content).append(endPos);
+			line.data('wrapper', wrapper);
+		}else{
+			var wrapper = line.data('wrapper');
+			prevLine = wrapper.prev();
+			if (prevLine.find('.expander').size() > 0){
+				return;
+			}
+		}
+		wrapper.hide();
+
+		var expander = $('<span class="expander">(...) <i>// </i></span>');
+		expander.appendTo(prevLine);
+		expander.append($('<i></i>').text(content.text().substring(0, 90)+'...'));
+		expander.css(expanderCss).css({
+			'white-space': 'initial'
+		});
+		expander.on('click', function(){
+			wrapper.show();
+			expander.remove();
+		});
     });
-    code.delegate('.expander-close', 'click', function(){
-        var $this = $(this);
-        var p = $this.closest('p');
-        var thisIntend = p.attr('class');
-        p.prevUntil(thisIntend).toggle();
-    });
+	$('<div></div>').append(
+			$('<a href="javascript:void(0)">Close All</a>').on('click', function(){
+				code.find('.expander-open').trigger('click');
+			})).append(
+			$('<a href="javascript:void(0)">Open All</a>').on('click', function(){
+				code.find('.expander').trigger('click');
+			})
+		).prependTo(code).find('a').css({
+			'margin-left' : '2em'
+		});;
+
+	function findNextDired(elem, dir, selector){
+		for (var next = elem[dir](); !next.is(selector); next = next[dir]()){
+			if (next.size() <= 0){
+				break;
+			}
+		}
+		return next;
+	}
     function findFirstNonBlankPos(str){
         for (var j = 0; j < str.length; j++){
             if (str[j] != ' '){

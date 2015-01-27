@@ -12,11 +12,7 @@ class CacheLog implements ILog{
     public function __construct(){
         $this->cache = new \Memcache();
         $this->cache->connect('127.0.0.1', 11211);
-        $fileSize = $this->cache->get(self::LOG_ITEM_NUM);
-        $this->fileSize = $fileSize = $fileSize ? $fileSize : 0;
-        if ($fileSize > 200 && !@isset($_REQUEST['seek'])){
-            $this->next = $fileSize - 200;
-        }
+        $this->fileSize = intval($this->cache->get(self::LOG_ITEM_NUM));
     }
     private $next = 0;
     public function seek($pos){

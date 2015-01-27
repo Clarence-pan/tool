@@ -23,6 +23,9 @@ class CacheLog implements ILog{
         $item = $this->cache->get(self::LOG_ITEM_PREFIX.$next);
         return $item;
     }
+    public function eof(){
+        return $this->next >= $this->count;
+    }
     public function clear(){
         $this->cache->set(self::LOG_ITEM_NUM, 0);
         $this->count = 0;

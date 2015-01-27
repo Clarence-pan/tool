@@ -19,8 +19,11 @@ function get_style_of_request($request) {
 }
 
 function output_logs(\tool\util\model\log\ILog $log, $id = 100000) {
-    for ($item = $log->next(); $item; $item = $log->next(), $id++):
+    for ($item = $log->next(); !$log->eof(); $item = $log->next(), $id++):
         if (filterLog($item)) {
+            echo PHP_EOL."<!-- filtered: ".PHP_EOL;
+            echo var_export($item);
+            echo PHP_EOL."-->";
             continue;
         }
         ?>

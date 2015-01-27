@@ -7,5 +7,5 @@ function filterLog($logLine){
         && in_array($logLine['msgHead'], array('begin', 'end'))){
         return true;
     }
-    return true;
+    return false;
 }

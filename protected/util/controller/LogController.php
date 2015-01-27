@@ -19,4 +19,11 @@ class LogController extends Controller {
     public function doPostView(){
         $this->render('log');
     }
+
+    public function doGetInterested(){
+        $this->render('log_interested');
+    }
+    public function doPostInterested(){
+        $this->render('log_interested');
+    }
 } 

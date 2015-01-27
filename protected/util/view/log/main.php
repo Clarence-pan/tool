@@ -45,7 +45,7 @@ function output_logs($log, $id=100000){
     return $id;
 }
 
-$filter = ($filter ? $filter : 'basic');
+$filter = (isset($filter) and $filter ? $filter : 'basic');
 require(__DIR__."/_filterLog_$filter.php");
 
 if(!@$_REQUEST["autoAppend"]){

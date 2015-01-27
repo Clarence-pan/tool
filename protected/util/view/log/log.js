@@ -112,13 +112,44 @@ function showInNewWindow(e){
     if (e.innerHTML.split("\n").length > 3){
         var x = window.open('', '_blank');
         x.document.body.innerHTML = '<pre>'+e.innerHTML+'</pre>';
+        bindExpander($(x.document.body).children('pre'));
     }
 }
-function expandThisCell(e){
+function bindExpander(code){
+    var lines = code.html().split('\n');
+    code.empty();
+    for (var i = 0; i < lines.length; i++){
+        var line = lines[i];
+        var p = $('<p></p>').text(line).addClass('intend-'+findFirstNonBlankPos(line));
+        p.html(p.html().replace('(', '<span class="expander-open">(</span>').replace(')', '<span class="expander-close">)</span>'))
+        code.append(p);
+    }
+    code.delegate('.expander-open', 'click', function(){
+        var $this = $(this);
+        var p = $this.closest('p');
+        var thisIntend = p.attr('class');
+        p.nextUntil(thisIntend).toggle();
+    });
+    code.delegate('.expander-close', 'click', function(){
+        var $this = $(this);
+        var p = $this.closest('p');
+        var thisIntend = p.attr('class');
+        p.prevUntil(thisIntend).toggle();
+    });
+    function findFirstNonBlankPos(str){
+        for (var j = 0; j < str.length; j++){
+            if (str[j] != ' '){
+                return j;
+            }
+        }
+        return false;
+    }
+}
+function expandThisCell(e, evt){
     var top = $(e).toggleClass('fixed-height').offset().top;
     // 如果滚动得超过窗口范围了，自动滚回去
     if (window.scrollY > top ){
-        window.scrollTo(0, top - 30);
+        window.scrollTo(0, top - evt.clientY);
     }
 }
 function toggle_very_brief(v){

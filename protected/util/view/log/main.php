@@ -33,7 +33,7 @@ function output_logs(\tool\util\model\log\ILog $log, $id = 100000) {
                 <li class="<?php echo $key ?>"
                     <?php if ($key == 'msgBody') { ?>
                         ondblclick="showInNewWindow(this);"
-                        oncontextmenu="expandThisCell(this);return false;"
+                        oncontextmenu="expandThisCell(this, arguments[0]);return false;"
                         title="右击展开，双击在新的窗口查看"
                     <?php } else if ($key == 'msgHead' || $key == 'category' || $key == 'level') { ?>
                         ondblclick="showStackTrace(this);"

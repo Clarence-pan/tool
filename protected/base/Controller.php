@@ -41,12 +41,12 @@ class Controller {
 
     /**
      * 渲染
-     * @param $view string view文件名
-     * @param $params
-     * @param $return
+     * @param $_view string view文件名
+     * @param $_params array
+     * @param $_return bool
      * @return string
      */
-    public function renderPartial($_view, $_params, $_return){
+    public function renderPartial($_view, $_params = null, $_return = false){
         $_class = new \ReflectionClass($this);
         ob_start();
         if (is_array($_params)) {

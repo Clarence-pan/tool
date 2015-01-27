@@ -55,7 +55,7 @@ if(!@$_REQUEST["autoAppend"]){
     } else {
         $links = array('interested' => 'interested');
     }
-    $this->renderPartial('log/_tools.php', array('links' => $links));
+    $this->renderPartial('log/_tools', array('links' => $links));
 }
 
 $log = new \tool\util\model\log\CacheLog();

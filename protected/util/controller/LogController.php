@@ -2,7 +2,7 @@
 namespace tool\util\controller;
 
 ini_set('display_errors', 'on');
-error_reporting(E_ALL ^ E_STRICT );
+error_reporting(E_ALL ^ E_STRICT ^ E_NOTICE ^ E_WARNING );
 use tool\base\Controller as Controller;
 use tool\util\model\log\CacheLog;
 

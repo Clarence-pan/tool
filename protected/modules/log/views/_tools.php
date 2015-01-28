@@ -13,9 +13,9 @@
         <input type="button" onclick="window.stopAutoAppend = true" value="Stop auto append" />
         <input type="button" onclick="scrollToTop()" value="Top" />
         <input type="button" onclick="scrollToBottom()" value="Bottom" />
-        <?php foreach ($links as $href => $display) { ?>
-            <a href="<?php echo $href ?>"><?php echo $display ?></a>
-        <?php  }  ?>
+        <?php foreach ($links as $display => $href) {
+                    echo CHtml::link($display, $href);
+         }  ?>
         <label>
             <input type="checkbox" onclick="toggle_very_brief(this.checked)"/>
             Brief

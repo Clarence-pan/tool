@@ -12,6 +12,9 @@ class DefaultController extends Controller
 		$this->render('index');
 	}
 
+    public function actionInterested(){
+        $this->render('index', array('filter' => 'interested'));
+    }
     public function actionCache($key=null){
         $cacheLog = new \log\models\CacheLog();
         $displayKey = function($key) use ($cacheLog){

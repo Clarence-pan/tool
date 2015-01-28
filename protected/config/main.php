@@ -57,6 +57,13 @@ return array(
 			'charset' => 'utf8',
 		),
 		*/
+        'dbAjax' => array(
+            'connectionString' => 'mysql:host=localhost;dbname=ajax',
+            'emulatePrepare' => true,
+            'username' => 'ajax',
+            'password' => 'cDN2hrudsNBPSXtz',
+            'charset' => 'utf8',
+        ),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

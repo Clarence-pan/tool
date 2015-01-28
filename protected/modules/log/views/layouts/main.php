@@ -53,7 +53,7 @@ function output_logs(log\models\ILog $log, $id = 100000) {
 }
 
 $filter = ((isset($filter) and $filter) ? $filter : 'basic');
-require(__DIR__ . "/_filterLog_$filter.php");
+$this->renderPartial("_filterLog_$filter");
 
 if (!@$_REQUEST["autoAppend"]) {
     $this->renderPartial('_html_header');

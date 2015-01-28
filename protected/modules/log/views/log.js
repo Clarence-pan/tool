@@ -195,10 +195,11 @@ function bindExpander(code){
 	$('<div></div>').append(
 			$('<a href="javascript:void(0)">Close All</a>').on('click', function(){
 				code.find('.expander-open').trigger('click');
-			})).append(
+			}).hide()
+        ).append(
 			$('<a href="javascript:void(0)">Open All</a>').on('click', function(){
 				code.find('.expander').trigger('click');
-			})
+			}).hide()
 		).prependTo(code).find('a').css({
 			'margin-left' : '2em'
 		});;

@@ -58,11 +58,11 @@ $this->renderPartial("/_filterLog_$filter");
 if (!@$_REQUEST["autoAppend"]) {
     $this->renderPartial('/_html_header');
     if ($filter != 'basic') {
-        $links = array('View All' => array('default/index'));
+        $links = array('View All' => array('index'));
     } else {
-        $links = array('interested' => array('default/interested'));
+        $links = array('interested' => array('interested'));
     }
-    $links['cache'] = array('default/cache');
+    $links['cache'] = array('cache');
     $this->renderPartial('/_tools', array('links' => $links));
 }
 

@@ -53,16 +53,16 @@ function output_logs(log\models\ILog $log, $id = 100000) {
 }
 
 $filter = ((isset($filter) and $filter) ? $filter : 'basic');
-$this->renderPartial("_filterLog_$filter");
+$this->renderPartial("/_filterLog_$filter");
 
 if (!@$_REQUEST["autoAppend"]) {
-    $this->renderPartial('_html_header');
+    $this->renderPartial('/_html_header');
     if ($filter != 'basic') {
         $links = array('view' => 'View All');
     } else {
         $links = array('interested' => 'interested');
     }
-    $this->renderPartial('_tools', array('links' => $links));
+    $this->renderPartial('/_tools', array('links' => $links));
 }
 
 $log = new log\models\CacheLog();

@@ -56,13 +56,13 @@ $filter = ((isset($filter) and $filter) ? $filter : 'basic');
 require(__DIR__ . "/_filterLog_$filter.php");
 
 if (!@$_REQUEST["autoAppend"]) {
-    $this->renderPartial('log/_html_header');
+    $this->renderPartial('_html_header');
     if ($filter != 'basic') {
         $links = array('view' => 'View All');
     } else {
         $links = array('interested' => 'interested');
     }
-    $this->renderPartial('log/_tools', array('links' => $links));
+    $this->renderPartial('_tools', array('links' => $links));
 }
 
 $log = new log\models\CacheLog();

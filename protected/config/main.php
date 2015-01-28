@@ -63,6 +63,10 @@ return array(
             'username' => 'ajax',
             'password' => 'cDN2hrudsNBPSXtz',
             'charset' => 'utf8',
+            'class' => 'CDbConnection',
+            'enableProfiling' => YII_DEBUG,
+            'enableParamLogging' => YII_DEBUG,
+            'autoConnect' => false
         ),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

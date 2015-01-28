@@ -15,6 +15,7 @@
         <input type="button" onclick="scrollToBottom()" value="Bottom" />
         <?php foreach ($links as $display => $href) {
                     echo CHtml::link($display, $href);
+                    echo "<span> </span>";
          }  ?>
         <label>
             <input type="checkbox" onclick="toggle_very_brief(this.checked)"/>

@@ -131,7 +131,7 @@ function bindExpander(code){
 			var intendClass = 'intend-'+findFirstNonBlankPos(line);
 			var line = $('<div class="line"></div>').text(line).attr('data-intend-class', intendClass).addClass(intendClass);
 			line.html(line.html()
-                .replaceAll(/ /g, '&nbsp;')
+                .replace(/ /g, '&nbsp;')
                 .replace('(', '<span class="expander-open">(</span>')
                 .replace(')', '<span class="expander-close">)</span>')
                 .replace('array', '<span class="expander-array">array</span>')

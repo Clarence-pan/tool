@@ -62,7 +62,7 @@ if (!@$_REQUEST["autoAppend"]) {
     } else {
         $links = array('interested' => array('default/interested'));
     }
-    $links[] = array('cache' => array('default/cache'));
+    $links['cache'] = array('default/cache');
     $this->renderPartial('/_tools', array('links' => $links));
 }
 

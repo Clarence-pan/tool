@@ -1,8 +1,9 @@
 <?php
 /**
  * @var $this DefaultController The controller
- * @var $content string The content of layout.
  * @var $filter string  Log filter name
+ * @var $start int  -- From where to display log
+ * @var $limit int  -- How many log items to display
  * @return mixed
  */
 function get_style_of_request($request) {
@@ -19,8 +20,8 @@ function get_style_of_request($request) {
     return 'background-color: ' . $colors[$i];
 }
 
-function output_logs(log\models\ILog $log, $id = 100000) {
-    for ($item = $log->next(); !$log->eof(); $item = $log->next(), $id++):
+function output_logs(log\models\ILog $log, $id = 100000, $limit) {
+    for ($item = $log->next(), $i = 0; !$log->eof() && $i < $limit; $item = $log->next(), $id++, $i++):
         if (filterLog($item)) {
             echo PHP_EOL."<!-- filtered: ".PHP_EOL;
             echo var_export($item);
@@ -80,9 +81,15 @@ if (@$_REQUEST['clear']) {
 if (@$_REQUEST['seek']) {
     $log->seek(intval(@$_REQUEST['seek']));
 }
+if ($start){
+    $log->seek($start);
+}
 $id = @$_REQUEST["id"];
 $id = $id ? $id : 0;
-$id = output_logs($log, $id);
+$pager = $this->renderPartial('pager', array('count' => $log->count(), 'start' => $start, 'limit' => $limit), true);
+echo $pager;
+$id = output_logs($log, $id, $limit);
+echo $pager;
 
 
 

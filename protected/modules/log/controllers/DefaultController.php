@@ -7,14 +7,16 @@ class DefaultController extends Controller
     public function init()
     {
     }
-	public function actionIndex()
+
+	public function actionIndex($start=0, $limit=500, $filter='basic')
 	{
-		$this->render('index');
+		$this->render('index', compact('start', 'limit', 'filter'));
 	}
 
-    public function actionInterested(){
-        $this->render('index', array('filter' => 'interested'));
+    public function actionInterested($start=0, $limit=500){
+        $this->actionIndex($start, $limit, 'interested');
     }
+
     public function actionCache($key=null){
         $cacheLog = new \log\models\CacheLog();
         $displayKey = function($key) use ($cacheLog){

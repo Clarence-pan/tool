@@ -20,7 +20,7 @@ function get_style_of_request($request) {
     return 'background-color: ' . $colors[$i];
 }
 
-function output_logs(log\models\ILog $log, $id = 100000, $limit) {
+function output_logs(log\models\ILog $log, $id, $limit) {
     for ($item = $log->next(), $i = 0; !$log->eof() && $i < $limit; $item = $log->next(), $id++, $i++):
         if (filterLog($item)) {
             echo PHP_EOL."<!-- filtered: ".PHP_EOL;
@@ -83,11 +83,9 @@ if (@$_REQUEST['seek']) {
 if ($start){
     $log->seek($start);
 }
-$id = @$_REQUEST["id"];
-$id = $id ? $id : 0;
 $pager = $this->renderPartial('pager', array('count' => $log->count(), 'start' => $start, 'limit' => $limit), true);
 echo $pager;
-$id = output_logs($log, $id, $limit);
+output_logs($log, $start, $limit);
 echo $pager;
 
 echo '<script type="application/javascript">

@@ -16,7 +16,7 @@
         <input type="button" onclick="scrollToTop()" value="Top" />
         <input type="button" onclick="scrollToBottom()" value="Bottom" />
         <?php foreach ($links as $display => $href) {
-                    echo CHtml::link($display, $href, $pager);
+                    echo CHtml::link($display, array_merge($href, $pager));
                     echo "<span> </span>";
          }  ?>
         <label>

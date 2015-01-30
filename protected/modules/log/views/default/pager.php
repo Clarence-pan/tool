@@ -13,7 +13,7 @@ $pageCount = intval(($count + $limit - 1) / $limit); // 页数
     $startPage = max(0, min($currentPage - intval($showPageCount / 2), $pageCount - $showPageCount));
     $endPage = $startPage + $showPageCount;
     if ($start > 0){
-        echo CHtml::link('1<<', array('', 'start' => 0, 'limit' => $limit));
+        echo CHtml::link('<<', array('', 'start' => 0, 'limit' => $limit));
         echo CHtml::link(' < ', array('', 'start' => max($start - $limit, 0), 'limit' => $limit));
     }
     for ($page = $startPage; $page < $pageCount && $page < $endPage; $page++){

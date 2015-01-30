@@ -49,6 +49,7 @@ function output_logs(log\models\ILog $log, $id, $limit) {
         </script>
     <?PHP endif;
     endfor;
+
     return $id;
 }
 
@@ -65,19 +66,20 @@ if (!@$_REQUEST["autoAppend"]) {
         $links = array('interested' => array('interested'));
     }
     $links['cache'] = array('cache');
-    $this->renderPartial('/_tools', array('links' => $links, 'pageEndLogPos' => $log->count()));
+    $this->renderPartial('/_tools', array('links' => $links, 'pageEndLogPos' => $log->count(), 'pager' => array('start' => $start, 'limit' => $limit)));
 }
 
 if (@$_REQUEST['clear']) {
     if (@$_REQUEST['clear'] >= $log->count() || @$_REQUEST['clear'] == 'all') {
         $log->clear();
         echo "Clear finished!";
+
         return;
     } else {
         echo "Already cleared! The following is new one: ";
     }
 }
-if ($start){
+if ($start) {
     $log->seek($start);
 }
 $pager = $this->renderPartial('pager', array('count' => $log->count(), 'start' => $start, 'limit' => $limit), true);

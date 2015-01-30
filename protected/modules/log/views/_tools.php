@@ -2,6 +2,7 @@
 /**
  * @var $links array
  * @var $pageEndLogPos int
+ * @var $pager array
  */
 ?>
 <div class="tools">
@@ -15,7 +16,7 @@
         <input type="button" onclick="scrollToTop()" value="Top" />
         <input type="button" onclick="scrollToBottom()" value="Bottom" />
         <?php foreach ($links as $display => $href) {
-                    echo CHtml::link($display, $href);
+                    echo CHtml::link($display, $href, $pager);
                     echo "<span> </span>";
          }  ?>
         <label>

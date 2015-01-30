@@ -5,7 +5,7 @@
  * @var $limit int
  */
 $currentPage = intval($start / $limit); // 当前是第几页
-$pageCount = $count / $limit; // 页数
+$pageCount = intval(($count + $limit - 1) / $limit); // 页数
 ?>
 <div style="width: 100%; text-align: right">
 <?php

@@ -63,7 +63,8 @@ if (!@$_REQUEST["autoAppend"]) {
         $links = array('interested' => array('interested'));
     }
     $links['cache'] = array('cache');
-    $this->renderPartial('/_tools', array('links' => $links));
+    $pageEndLogPos = $count;
+    $this->renderPartial('/_tools', array('links' => $links, 'pageEndLogPos' => $pageEndLogPos));
 }
 
 $log = new log\models\CacheLog();
@@ -75,10 +76,6 @@ if (@$_REQUEST['clear']) {
     } else {
         echo "Already cleared! The following is new one: ";
     }
-}
-
-if (@$_REQUEST['seek']) {
-    $log->seek(intval(@$_REQUEST['seek']));
 }
 if ($start){
     $log->seek($start);

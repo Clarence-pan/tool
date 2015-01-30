@@ -21,7 +21,7 @@ $pageCount = intval(($count + $limit - 1) / $limit); // 页数
     }
     if ($currentPage < $pageCount - 1){
         echo CHtml::link(' > ', array('', 'start' => min($start + $limit, $count), 'limit' => $limit));
-        echo CHtml::link('>>', array('', 'start' => floor($count / $limit) * $limit, 'limit' => $limit ));
+        echo CHtml::link('>>', array('', 'start' => $pageCount - 1, 'limit' => $limit ));
     }
     echo "[$currentPage/$pageCount(Total: $count)]";
 ?>

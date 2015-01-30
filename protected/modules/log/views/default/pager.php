@@ -7,7 +7,7 @@
 $currentPage = intval($start / $limit); // 当前是第几页
 $pageCount = intval(($count + $limit - 1) / $limit); // 页数
 ?>
-<div style="width: 100%; text-align: right">
+<div style="width: 100%; text-align: center">
 <?php
     $showPageCount = 10; // 显示几页
     $startPage = max(0, min($currentPage - intval($showPageCount / 2), $pageCount - $showPageCount));

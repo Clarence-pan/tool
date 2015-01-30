@@ -17,7 +17,8 @@ $pageCount = intval(($count + $limit - 1) / $limit); // 页数
         echo CHtml::link(' < ', array('', 'start' => max($start - $limit, 0), 'limit' => $limit));
     }
     for ($page = $startPage; $page < $pageCount && $page < $endPage; $page++){
-        echo CHtml::link(" $page ", array('', 'start' => max($page * $limit, 0), 'limit' => $limit));
+        $options = ($page == $currentPage ? array('style' => 'color: white; background-color: black;') : array());
+        echo CHtml::link(" $page ", array('', 'start' => max($page * $limit, 0), 'limit' => $limit), $options);
     }
     if ($currentPage < $pageCount - 1){
         echo CHtml::link(' > ', array('', 'start' => min($start + $limit, $count), 'limit' => $limit));

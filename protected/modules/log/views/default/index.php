@@ -23,9 +23,9 @@ function get_style_of_request($request) {
 function output_logs(log\models\ILog $log, $id, $limit) {
     for ($item = $log->next(), $i = 0; !$log->eof() && $i < $limit; $item = $log->next(), $id++, $i++):
         if (filterLog($item)) {
-            echo PHP_EOL."<!-- filtered: ".PHP_EOL;
-            echo var_export($item);
-            echo PHP_EOL."-->";
+//            echo PHP_EOL."<!-- filtered: ".PHP_EOL;
+//            echo var_export($item);
+//            echo PHP_EOL."-->";
             continue;
         }
         ?>

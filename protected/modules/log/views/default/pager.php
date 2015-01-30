@@ -21,9 +21,13 @@ $pageCount = intval(($count + $limit - 1) / $limit); // 页数
         $options['style'] .= 'margin-left: 0.5em; margin-right: 0.5em;';
         echo CHtml::link($page + 1, array('', 'start' => max($page * $limit, 0), 'limit' => $limit), $options);
     }
+    if ($pageCount > $endPage){
+        echo '..';
+        echo CHtml::link($pageCount, array('', 'start' => ($pageCount - 1) * $limit, 'limit' => $limit ));
+    }
     if ($currentPage < $pageCount - 1){
         echo CHtml::link(' > ', array('', 'start' => min($start + $limit, $count), 'limit' => $limit));
-        echo CHtml::link('>>'.$pageCount, array('', 'start' => ($pageCount - 1) * $limit, 'limit' => $limit ));
+        echo CHtml::link('>>', array('', 'start' => ($pageCount - 1) * $limit, 'limit' => $limit ));
     }
     echo "(Total: $count)";
 ?>

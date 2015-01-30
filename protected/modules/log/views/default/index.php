@@ -55,6 +55,8 @@ function output_logs(log\models\ILog $log, $id, $limit) {
 $filter = ((isset($filter) and $filter) ? $filter : 'basic');
 $this->renderPartial("/_filterLog_$filter");
 
+$log = new log\models\CacheLog();
+
 if (!@$_REQUEST["autoAppend"]) {
     $this->renderPartial('/_html_header');
     if ($filter != 'basic') {
@@ -63,11 +65,9 @@ if (!@$_REQUEST["autoAppend"]) {
         $links = array('interested' => array('interested'));
     }
     $links['cache'] = array('cache');
-    $pageEndLogPos = $count;
-    $this->renderPartial('/_tools', array('links' => $links, 'pageEndLogPos' => $pageEndLogPos));
+    $this->renderPartial('/_tools', array('links' => $links, 'pageEndLogPos' => $log->count()));
 }
 
-$log = new log\models\CacheLog();
 if (@$_REQUEST['clear']) {
     if (@$_REQUEST['clear'] >= $log->count() || @$_REQUEST['clear'] == 'all') {
         $log->clear();

@@ -4,11 +4,8 @@
  * @var $start int
  * @var $limit int
  */
-$currentPage = intval($start / $limit);
-$pageCount = ($count - $start);
-if ($pageCount > $limit){
-    $pageCount = $limit;
-}
+$currentPage = intval($start / $limit); // 当前是第几页
+$pageCount = $count / $limit; // 页数
 ?>
 <div style="width: 100%; text-align: right">
 <?php
@@ -26,6 +23,6 @@ if ($pageCount > $limit){
         echo CHtml::link(' > ', array('', 'start' => min($start + $limit, $count), 'limit' => $limit));
     }
     echo CHtml::link('>>', array('', 'start' => floor($count / $limit) * $limit, 'limit' => $limit ));
-    echo "[$start..$pageCount/$count]";
+    echo "[$currentPage/$pageCount(Total: $count)]";
 ?>
 </div>

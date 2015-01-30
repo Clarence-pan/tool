@@ -49,7 +49,9 @@ function output_logs(log\models\ILog $log, $id = 100000, $limit) {
         </script>
     <?PHP endif;
     endfor;
-
+    echo '<script type="application/javascript">
+                scrollToBottom();
+          </script>';
     return $id;
 }
 

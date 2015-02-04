@@ -120,6 +120,7 @@ li.line {
 }
 dt.summary{
     font-weight: bold;
+    cursor: pointer;
 }
 .duplicated-2{
     color: #ff5f5f;

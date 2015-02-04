@@ -18,6 +18,7 @@ class DefaultController extends Controller
     }
 
     public function actionSummary($start=0, $limit=500){
+        $_GET['sum'] = true;
         $this->actionIndex($start, $limit, 'interested', array('summaryOnly' => true));
     }
 

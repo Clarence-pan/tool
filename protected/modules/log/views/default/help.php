@@ -11,6 +11,7 @@
 </head>
 <body>
 <form id="query" action="index" method="GET">
+    <h3>Index</h3>
     <label>
         <input type="checkbox" name="sum" />
         Summary - whether display summary of requests (not perfect!)
@@ -19,10 +20,6 @@
     <label>
         <input type="checkbox" name="profile" />
         Profile - whether display profile results
-    </label>
-    <label>
-        <input type="checkbox" name="withoutDetail" />
-        Without detailed summary
     </label>
     <br/>
     <label>
@@ -47,6 +44,14 @@
         limit <input type="number" name="limit" value="500" /> items.
     </label>
     <input type="submit" value="submit">
+</form>
+<form action="summary" method="GET">
+    <h3>Summary</h3>
+    <label>
+        <input type="checkbox" name="withoutDetail" />
+        Without detailed summary
+    </label>
+    <input type="submit" value="submit" />
 </form>
 </body>
 </html>

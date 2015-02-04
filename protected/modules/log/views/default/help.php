@@ -79,11 +79,11 @@
     <input type="submit" value="submit"/>
 </form>
 
-<form action="disableTraceStack" method="post" target="_blank">
-    <input type="submit" value="Disable trace stack" />
+<form action="disableStackTrace" method="post" target="_blank">
+    <input type="submit" value="Disable stack trace" />
 </form>
-<form action="enableTraceStack" method="post" target="_blank">
-    <input type="submit" value="Enable trace stack" />
+<form action="enableStackTrace" method="post" target="_blank">
+    <input type="submit" value="Enable stack trace" />
 </form>
 
 </body>

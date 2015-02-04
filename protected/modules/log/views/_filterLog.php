@@ -97,7 +97,7 @@ function output_summary() {
     $summary = get_summary_of_request($requests[$prevRequest]);
     $style = get_style_of_request($prevRequest);
     $summaryId++;
-    echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>Summary Of $prevRequest</h3><div class='summary'>$summary</div></div>";
+    echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>$prevRequest</h3><div class='summary'>$summary</div></div>";
     echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
     $requests[$prevRequest]['summary-id'] = $summaryId;
 

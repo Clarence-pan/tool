@@ -7,9 +7,12 @@
  * @var $summaryOnly bool - whether only display summary
  */
 
-
+/**
+ * @param array $params
+ * @return array
+ */
 function with_get_params(array $params){
-    return array_merge($_GET, $params);
+    return array_merge(array($params[0]), $_GET, $params);
 }
 
 function get_style_of_request($request) {

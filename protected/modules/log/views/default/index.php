@@ -5,8 +5,13 @@
  * @var $start int  -- From where to display log
  * @var $limit int  -- How many log items to display
  * @var $summaryOnly bool - whether only display summary
- * @return mixed
  */
+
+
+function with_get_params(array $params){
+    return array_merge($_GET, $params);
+}
+
 function get_style_of_request($request) {
     $colors = explode(' ', '#ffffff #ffddff #ddffff #ffffdd #ddddff #ddffdd #ffdddd #dddddd');
     static $requests = array();

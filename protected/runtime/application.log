@@ -1,0 +1,120 @@
+2015/01/31 16:39:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in D:\workspaces\framework-yii\web\CWebApplication.php:286
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\workspaces\tool\index.php(9): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/04 15:58:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in D:\workspaces\framework-yii\web\CWebApplication.php:286
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\workspaces\tool\index.php(9): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/04 16:46:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in D:\workspaces\framework-yii\web\CWebApplication.php:286
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\workspaces\tool\index.php(9): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/04 16:48:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in D:\workspaces\framework-yii\web\CWebApplication.php:286
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\workspaces\tool\index.php(9): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/04 17:19:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in D:\workspaces\framework-yii\web\CWebApplication.php:286
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\workspaces\tool\index.php(9): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/04 17:19:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "line-75".' in D:\workspaces\framework-yii\web\CController.php:483
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CController.php(270): CController->missingAction('line-75')
+#1 D:\workspaces\framework-yii\web\CWebApplication.php(282): CController->run('line-75')
+#2 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('log/default/lin...')
+#3 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\workspaces\tool\index.php(9): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php/log/default/line-75
+HTTP_REFERER=http://tool.pcy.tuniu.org/index.php/log/default/interested?
+---
+2015/02/04 19:57:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in D:\workspaces\framework-yii\web\CWebApplication.php:286
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\workspaces\tool\index.php(9): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/04 20:07:27 [error] [exception.CException] exception 'CException' with message 'DefaultController cannot find the requested view "/log.css".' in D:\workspaces\framework-yii\web\CController.php:878
+Stack trace:
+#0 D:\workspaces\tool\protected\modules\log\views\default\help.php(9): CController->renderPartial('/log.css')
+#1 D:\workspaces\framework-yii\web\CBaseController.php(126): require('D:\workspaces\t...')
+#2 D:\workspaces\framework-yii\web\CBaseController.php(95): CBaseController->renderInternal('D:\workspaces\t...', NULL, true)
+#3 D:\workspaces\framework-yii\web\CController.php(869): CBaseController->renderFile('D:\workspaces\t...', NULL, true)
+#4 D:\workspaces\framework-yii\web\CController.php(782): CController->renderPartial('help', NULL, true)
+#5 D:\workspaces\tool\protected\modules\log\controllers\DefaultController.php(46): CController->render('help')
+#6 D:\workspaces\framework-yii\web\actions\CInlineAction.php(49): DefaultController->actionHelp()
+#7 D:\workspaces\framework-yii\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 D:\workspaces\framework-yii\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 D:\workspaces\framework-yii\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 D:\workspaces\framework-yii\web\CWebApplication.php(282): CController->run('help')
+#11 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('log/default/hel...')
+#12 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#13 D:\workspaces\tool\index.php(9): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php/log/default/help
+HTTP_REFERER=http://tool.pcy.tuniu.org/index.php/log/default/index?sum=&request=GET+%2Fbb%2Fproduct%2Findexadkey+26365+&limit=
+---
+2015/02/04 20:07:40 [error] [exception.CException] exception 'CException' with message 'DefaultController cannot find the requested view "log.css".' in D:\workspaces\framework-yii\web\CController.php:878
+Stack trace:
+#0 D:\workspaces\tool\protected\modules\log\views\default\help.php(9): CController->renderPartial('log.css')
+#1 D:\workspaces\framework-yii\web\CBaseController.php(126): require('D:\workspaces\t...')
+#2 D:\workspaces\framework-yii\web\CBaseController.php(95): CBaseController->renderInternal('D:\workspaces\t...', NULL, true)
+#3 D:\workspaces\framework-yii\web\CController.php(869): CBaseController->renderFile('D:\workspaces\t...', NULL, true)
+#4 D:\workspaces\framework-yii\web\CController.php(782): CController->renderPartial('help', NULL, true)
+#5 D:\workspaces\tool\protected\modules\log\controllers\DefaultController.php(46): CController->render('help')
+#6 D:\workspaces\framework-yii\web\actions\CInlineAction.php(49): DefaultController->actionHelp()
+#7 D:\workspaces\framework-yii\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 D:\workspaces\framework-yii\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 D:\workspaces\framework-yii\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 D:\workspaces\framework-yii\web\CWebApplication.php(282): CController->run('help')
+#11 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('log/default/hel...')
+#12 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#13 D:\workspaces\tool\index.php(9): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php/log/default/help
+HTTP_REFERER=http://tool.pcy.tuniu.org/index.php/log/default/index?sum=&request=GET+%2Fbb%2Fproduct%2Findexadkey+26365+&limit=
+---
+2015/02/04 20:33:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "summary&withoutDetail=1".' in D:\workspaces\framework-yii\web\CController.php:483
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CController.php(270): CController->missingAction('summary&without...')
+#1 D:\workspaces\framework-yii\web\CWebApplication.php(282): CController->run('summary&without...')
+#2 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('log/default/sum...')
+#3 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\workspaces\tool\index.php(9): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php/log/default/summary&withoutDetail=1
+---
+2015/02/04 20:47:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "disableTraceStack".' in D:\workspaces\framework-yii\web\CController.php:483
+Stack trace:
+#0 D:\workspaces\framework-yii\web\CController.php(270): CController->missingAction('disableTraceSta...')
+#1 D:\workspaces\framework-yii\web\CWebApplication.php(282): CController->run('disableTraceSta...')
+#2 D:\workspaces\framework-yii\web\CWebApplication.php(141): CWebApplication->runController('log/default/dis...')
+#3 D:\workspaces\framework-yii\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\workspaces\tool\index.php(9): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php/log/default/disableTraceStack
+HTTP_REFERER=http://tool.pcy.tuniu.org/index.php/log/default/help
+---

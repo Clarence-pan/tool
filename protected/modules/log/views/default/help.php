@@ -3,7 +3,7 @@
  * @var $this DefaultController
  */
 ?>
-<form action="index" method="GET">
+<form id="query" action="index" method="GET">
     <label>
         <input type="checkbox" name="sum" />
         Summary - whether display summary of requests (not perfect!)
@@ -15,18 +15,18 @@
     </label>
     <br/>
     <label>
+        Matching @msgHead at index 0:
         <input type="text" name="heading" />
-        matching @msgHead at index 0
     </label>
     <br/>
     <label>
+        Substring matching @category:
         <input type="text" name="category" />
-        substring matching @category
     </label>
     <br/>
     <label>
+        Substring matching @request URL:
         <input type="text" name="request" />
-        substring matching @request URL
     </label>
     <br/>
     <label>

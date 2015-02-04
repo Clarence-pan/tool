@@ -144,6 +144,12 @@ dt.summary{
     text-decoration: none;
 }
 
-label{
+#query label{
     display: inline-block;
+}
+#query input[type=number]{
+    width: 5em;
+}
+#query input[type=text]{
+    width: 20em;
 }

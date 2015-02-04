@@ -108,13 +108,15 @@ function get_summary_of_request($request){
     foreach (array('外部接口调用', 'Querying SQL', 'Executing SQL', 'memcache') as $name) {
         $sum = $request[$name];
         if ($sum['count']){
-            $r .= "<dt class='summary' onclick='toggle_detail(this)'>$name {$sum['count']} 次</dt>";
+            $error = ($sum['count'] > 5 ? 'error' : '');
+            $r .= "<dt class='summary $error' onclick='toggle_detail(this)'>$name {$sum['count']} 次</dt>";
             foreach ($sum['rows'] as $line => $row) {
                 $row = htmlspecialchars($row);
                 if ($name == 'Querying SQL'){
                     $dupClass = get_duplicated_class($row, $sum['rows']);
                 }
-                $r .= "<dd class='detail $dupClass'><a href=\"#line-$line\">$line</a>: $row</dd>";
+                $url = (strstr($_SERVER['REQUEST_URI'], 'summary') ? 'index?' : '');
+                $r .= "<dd class='detail $dupClass'><a href=\"$url#line-$line\">$line</a>: $row</dd>";
             }
 
         }

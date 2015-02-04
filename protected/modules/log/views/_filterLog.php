@@ -96,7 +96,7 @@ function output_summary() {
     $summary = get_summary_of_request($requests[$prevRequest]);
     $style = get_style_of_request($prevRequest);
     $summaryId++;
-    $link = CHtml::link('>>', with_get_params(array('index', 'sum' => false, 'request'=>$prevRequest, 'limit'=>false)));
+    $link = CHtml::link('>>', with_get_params(array('interested', 'sum' => false, 'request'=>$prevRequest, 'limit'=>false)));
     echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>$prevRequest $link</h3><div class='summary'>$summary</div></div>";
     echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
     $requests[$prevRequest]['summary-id'] = $summaryId;

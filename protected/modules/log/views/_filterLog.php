@@ -96,7 +96,8 @@ function output_summary() {
     $summary = get_summary_of_request($requests[$prevRequest]);
     $style = get_style_of_request($prevRequest);
     $summaryId++;
-    echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>$prevRequest</h3><div class='summary'>$summary</div></div>";
+    $link = CHtml::link('>>', array('index', 'request'=>$prevRequest));
+    echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>$prevRequest $link</h3><div class='summary'>$summary</div></div>";
     echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
     $requests[$prevRequest]['summary-id'] = $summaryId;
 
@@ -116,7 +117,7 @@ function get_summary_of_request($request){
                     $dupClass = get_duplicated_class($row, $sum['rows']);
                 }
                 if (strstr($_SERVER['REQUEST_URI'], 'summary')){
-                    $url = "index?start=".($line - 1)."&limit=1";
+                    $url = "index?start=".($_GET['start'] + $line - 1)."&limit=1";
                     $target = '_blank';
                 }
                 $r .= "<dd class='detail $dupClass'><a href=\"$url#line-$line\" target='$target'>$line</a>: $row</dd>";

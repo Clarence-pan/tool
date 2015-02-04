@@ -6,7 +6,6 @@ $summaryId = 0;
 function filterLog(&$logItem, $interested){
     global $prevRequest;
     global $requests;
-    global $summaryId;
     /**
      * @var $category string
      * @var $msgHead string

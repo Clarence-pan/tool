@@ -4,6 +4,7 @@
  * @var $filter string  Log filter name
  * @var $start int  -- From where to display log
  * @var $limit int  -- How many log items to display
+ * @var $summaryOnly bool - whether only display summary
  * @return mixed
  */
 function get_style_of_request($request) {
@@ -19,10 +20,13 @@ function get_style_of_request($request) {
 
     return 'background-color: ' . $colors[$i];
 }
-function output_logs(log\models\ILog $log, $id, $limit, $interested) {
+function output_logs(log\models\ILog $log, $id, $limit, $interested, $summaryOnly) {
     for ($item = $log->next(), $i = 0; !$log->eof() && $i < $limit; $item = $log->next(), $id++, $i++):
         $item['line'] = $id + 1;
         if (filterLog($item, $interested)) {
+            continue;
+        }
+        if ($summaryOnly){
             continue;
         }
         ?>
@@ -69,8 +73,11 @@ if (!@$_REQUEST["autoAppend"]) {
     } else {
         $links = array('interested' => array('interested'));
     }
-    $links['cache'] = array('cache');
-    $links['?'] = array('help');
+    $links = array_merge($links, array(
+        'cache' => array('cache'),
+        'summary' => array('summary'),
+        '?' => array('help'),
+    ));
     $this->renderPartial('/_tools', array('links' => $links, 'pageEndLogPos' => $log->count(), 'pager' => array('start' => $start, 'limit' => $limit)));
 }
 
@@ -89,7 +96,7 @@ if ($start) {
 }
 $pager = $this->renderPartial('pager', array('count' => $log->count(), 'start' => $start, 'limit' => $limit), true);
 echo $pager;
-output_logs($log, $start, $limit, $filter == 'interested');
+output_logs($log, $start, $limit, $filter == 'interested', $summaryOnly);
 echo $pager;
 
 echo '<script type="application/javascript">

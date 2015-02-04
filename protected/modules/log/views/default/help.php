@@ -13,6 +13,9 @@
         category: string - substring matching @category
     </dd>
     <dd>
+        request: string - substring matching @request URL
+    </dd>
+    <dd>
         sum: bool - whether display summary of requests (not perfect!)
     </dd>
 </dl>

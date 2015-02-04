@@ -8,13 +8,17 @@ class DefaultController extends Controller
     {
     }
 
-	public function actionIndex($start=0, $limit=500, $filter='basic')
+	public function actionIndex($start=0, $limit=500, $filter='basic', $data=array())
 	{
-		$this->render('index', compact('start', 'limit', 'filter'));
+		$this->render('index', array_merge(compact('start', 'limit', 'filter'), $data));
 	}
 
     public function actionInterested($start=0, $limit=500){
         $this->actionIndex($start, $limit, 'interested');
+    }
+
+    public function actionSummary($start=0, $limit=500){
+        $this->actionIndex($start, $limit, 'interested', array('summaryOnly' => true));
     }
 
     public function actionCache($key=null){

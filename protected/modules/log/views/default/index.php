@@ -19,19 +19,21 @@ function get_style_of_request($request) {
 
     return 'background-color: ' . $colors[$i];
 }
-
 function output_logs(log\models\ILog $log, $id, $limit) {
     for ($item = $log->next(), $i = 0; !$log->eof() && $i < $limit; $item = $log->next(), $id++, $i++):
+        $item['line'] = $id + 1;
         if (filterLog($item)) {
-//            echo PHP_EOL."<!-- filtered: ".PHP_EOL;
-//            echo var_export($item);
-//            echo PHP_EOL."-->";
             continue;
         }
         ?>
-        <ul class="log" style="<?php echo get_style_of_request($item['request']) ?>">
+        <ul class="log <?php echo $item['class']?>" style="<?php echo get_style_of_request($item['request']) ?>">
             <li class="line"><?php echo $id + 1 ?>:</li>
-            <?php foreach ($item as $key => $logValue): ?>
+            <?php foreach ($item as $key => $logValue):?>
+                <?php
+                    if (in_array($key, array('line', 'class'))){
+                        continue;
+                    }
+                ?>
                 <li class="<?php echo $key ?>"
                     <?php if ($key == 'msgBody') { ?>
                         ondblclick="showInNewWindow(this);"

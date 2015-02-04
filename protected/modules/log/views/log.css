@@ -104,3 +104,7 @@ li.line {
     top: 1vh;
     z-index: 10;
 }
+.error, .error li, .error .msgBody, .error .msghead{
+    font-weight: bold;
+    color: red !important;
+}

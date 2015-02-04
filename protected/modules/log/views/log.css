@@ -144,6 +144,13 @@ dt.summary{
     text-decoration: none;
 }
 
+#query {
+    display: block;
+    min-width: 50em;
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
 #query label{
     display: inline-block;
 }

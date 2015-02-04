@@ -108,3 +108,23 @@ li.line {
     font-weight: bold;
     color: red !important;
 }
+
+.detail {
+    font-size: x-small;
+    border-bottom: 1px solid darkgray;
+}
+dt.summary{
+    font-weight: bold;
+}
+.duplicated-2{
+    color: #ff5f5f;
+}
+.duplicated-3{
+    color: #ff3f3f;
+}
+.duplicated-4{
+    color: #ff2f2f;
+}
+.duplicated-too-many-times{
+    color: red !important;
+}

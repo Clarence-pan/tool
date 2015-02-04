@@ -26,8 +26,8 @@ function output_logs(log\models\ILog $log, $id, $limit) {
             continue;
         }
         ?>
-        <ul class="log <?php echo $item['class']?>" style="<?php echo get_style_of_request($item['request']) ?>">
-            <li class="line"><?php echo $id + 1 ?>:</li>
+        <ul class="log <?php echo $item['class']?>" style="<?php echo get_style_of_request($item['request']) ?>" id="line-<?php echo $item['line'] ?>">
+            <li class="line"><?php echo $item['line']  ?>:</li>
             <?php foreach ($item as $key => $logValue):?>
                 <?php
                     if (in_array($key, array('line', 'class'))){
@@ -68,6 +68,7 @@ if (!@$_REQUEST["autoAppend"]) {
         $links = array('interested' => array('interested'));
     }
     $links['cache'] = array('cache');
+    $links['?'] = array('help');
     $this->renderPartial('/_tools', array('links' => $links, 'pageEndLogPos' => $log->count(), 'pager' => array('start' => $start, 'limit' => $limit)));
 }
 

@@ -37,4 +37,8 @@ class DefaultController extends Controller
         }
     }
 
+    public function actionHelp(){
+        $this->render('help');
+    }
+
 }

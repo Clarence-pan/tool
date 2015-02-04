@@ -3,6 +3,13 @@
  * @var $this DefaultController
  */
 ?>
+<html>
+<head>
+<style type="text/css">
+    <?php echo $this->renderPartial('/log.css') ?>
+</style>
+</head>
+<body>
 <form id="query" action="index" method="GET">
     <label>
         <input type="checkbox" name="sum" />
@@ -37,3 +44,5 @@
     </label>
     <input type="submit" value="submit">
 </form>
+</body>
+</html>

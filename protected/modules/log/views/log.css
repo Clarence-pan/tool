@@ -147,9 +147,9 @@ dt.summary{
 #query label{
     display: inline-block;
 }
-#query input[type=number]{
+#query input[type="number"]{
     width: 5em;
 }
-#query input[type=text]{
+#query input[type="text"]{
     width: 20em;
 }

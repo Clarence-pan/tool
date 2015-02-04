@@ -143,3 +143,7 @@ dt.summary{
     color: #000000;
     text-decoration: none;
 }
+
+label{
+    display: inline-block;
+}

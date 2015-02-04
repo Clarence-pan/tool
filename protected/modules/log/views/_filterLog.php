@@ -53,12 +53,12 @@ function filterLog(&$logItem, $interested){
     }
     if ($category == 'application' and strpos($msgHead, '外部接口调用') === 0){
         $requests[$request]['外部接口调用']['count']++;
-        $requests[$request]['外部接口调用']['rows'][$line] = $msgHead;
+        !$_GET['withoutDetail'] && $requests[$request]['外部接口调用']['rows'][$line] = $msgHead;
         return false;
     }
     if ($category == 'memcache' and strpos($msgHead, 'Memcache') === 0){
         $requests[$request]['memcache']['count']++;
-        $requests[$request]['memcache']['rows'][$line] = $msgHead;
+        !$_GET['withoutDetail'] && $requests[$request]['memcache']['rows'][$line] = $msgHead;
         return false;
     }
     if ($category == 'system.db.CDbCommand'){
@@ -72,12 +72,12 @@ function filterLog(&$logItem, $interested){
     }
     if ($category == 'system.db.CDbCommand' and strpos($msgHead, 'Querying SQL') === 0){
         $requests[$request]['Querying SQL']['count']++;
-        $requests[$request]['Querying SQL']['rows'][$line] = $msgBody;
+        !$_GET['withoutDetail'] && $requests[$request]['Querying SQL']['rows'][$line] = $msgBody;
         return false;
     }
     if ($category == 'system.db.CDbCommand' and strpos($msgHead, 'Executing SQL') === 0){
         $requests[$request]['Executing SQL']['count']++;
-        $requests[$request]['Executing SQL']['rows'][$line] = $msgBody;
+        !$_GET['withoutDetail'] &&  $requests[$request]['Executing SQL']['rows'][$line] = $msgBody;
         return false;
     }
     return true;
@@ -97,7 +97,7 @@ function output_summary() {
     $summary = get_summary_of_request($requests[$prevRequest]);
     $style = get_style_of_request($prevRequest);
     $summaryId++;
-    $link = CHtml::link('>>', with_get_params(array('interested', 'sum' => false, 'request'=>$prevRequest, 'limit'=>false)));
+    $link = CHtml::link('>>', with_get_params(array('interested', 'sum' => false, 'request'=>$prevRequest, 'limit'=>false)), array('target' => '_blank'));
     echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>$prevRequest $link</h3><div class='summary'>$summary</div></div>";
     echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
     $requests[$prevRequest]['summary-id'] = $summaryId;

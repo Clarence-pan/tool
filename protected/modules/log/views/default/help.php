@@ -20,6 +20,10 @@
         <input type="checkbox" name="profile" />
         Profile - whether display profile results
     </label>
+    <label>
+        <input type="checkbox" name="withoutDetail" />
+        Without detailed summary
+    </label>
     <br/>
     <label>
         Matching @msgHead at index 0:

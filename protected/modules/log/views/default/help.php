@@ -79,6 +79,7 @@
     <input type="submit" value="submit"/>
 </form>
 
+<h3>Stack Trace</h3>
 <form action="disableStackTrace" method="post" target="_blank">
     <input type="submit" value="Disable stack trace" />
 </form>

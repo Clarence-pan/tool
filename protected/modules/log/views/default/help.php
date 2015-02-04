@@ -12,4 +12,7 @@
     <dd>
         category: string - substring matching @category
     </dd>
+    <dd>
+        sum: bool - whether display summary of requests (not perfect!)
+    </dd>
 </dl>

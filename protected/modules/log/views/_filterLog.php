@@ -116,7 +116,7 @@ function get_summary_of_request($request){
                     $dupClass = get_duplicated_class($row, $sum['rows']);
                 }
                 if (strstr($_SERVER['REQUEST_URI'], 'summary')){
-                    $url = "index?start=$line&limit=1";
+                    $url = "index?start={$line - 1}&limit=1";
                     $target = '_blank';
                 }
                 $r .= "<dd class='detail $dupClass'><a href=\"$url#line-$line\" target='$target'>$line</a>: $row</dd>";

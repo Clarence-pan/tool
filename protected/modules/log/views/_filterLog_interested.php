@@ -2,9 +2,11 @@
 
 $requests = array();
 $prevRequest = '';
+$summaryId = 0;
 function filterLog(&$logItem){
     global $prevRequest;
     global $requests;
+    global $summaryId;
     /**
      * @var $category string
      * @var $msgHead string
@@ -19,7 +21,10 @@ function filterLog(&$logItem){
         if ($prevRequest){
             $summary = get_summary_of_request($requests[$prevRequest]);
             $style = get_style_of_request($prevRequest);
-            echo "<div style='$style'><h3>Summary Of $prevRequest</h3><div class='summary'>$summary</div></div>";
+            $summaryId++;
+            echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>Summary Of $prevRequest</h3><div class='summary'>$summary</div></div>";
+            echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
+            $requests[$prevRequest]['summary-id'] = $summaryId;
         }
         $prevRequest = $request;
     }
@@ -30,11 +35,12 @@ function filterLog(&$logItem){
         return true;
     }
 
-    if ($_GET['category'] && $_GET['heading']){
-        if (strpos($_GET['category'], $category) === false or strpos($msgHead, $_GET['heading']) !== 0){
+    if ($_GET['request']){
+        if (strpos($request, $_GET['request']) === false){
             return true;
         }
     }
+
     if ($_GET['category']){
         if (strpos($_GET['category'], $category) === false){
             return true;

@@ -106,7 +106,9 @@ if ($start) {
 $pager = $this->renderPartial('pager', array('count' => $log->count(), 'start' => $start, 'limit' => $limit), true);
 echo $pager;
 output_logs($log, $start, $limit, $filter == 'interested', $summaryOnly);
-echo $pager;
+if ($log->count()){
+    echo $pager;
+}
 
 echo '<script type="application/javascript">
                 scrollToBottom();

@@ -6,7 +6,7 @@
 <html>
 <head>
 <style type="text/css">
-    <?php echo $this->renderPartial('/log.css') ?>
+    <?php echo $this->renderPartial('log.css') ?>
 </style>
 </head>
 <body>

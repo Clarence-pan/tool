@@ -12,6 +12,7 @@
  * @return array
  */
 function with_get_params(array $params){
+    array_shift($params);
     return array_merge(array($params[0]), $_GET, $params);
 }
 

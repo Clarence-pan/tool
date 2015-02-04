@@ -45,7 +45,7 @@
     </label>
     <input type="submit" value="submit">
 </form>
-<form action="summary" method="GET">
+<form action="summary" method="GET" id="query-summary">
     <h3>Summary</h3>
     <label>
         <input type="checkbox" name="withoutDetail" />

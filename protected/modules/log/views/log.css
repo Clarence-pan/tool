@@ -144,7 +144,7 @@ dt.summary{
     text-decoration: none;
 }
 
-#query {
+#query, #query-summary {
     display: block;
     min-width: 50em;
     width: 50vw;

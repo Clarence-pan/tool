@@ -74,9 +74,9 @@ $log = new log\models\CacheLog();
 if (!@$_REQUEST["autoAppend"]) {
     $this->renderPartial('/_html_header');
     if ($filter != 'basic') {
-        $links = array('View All' => array('index'));
+        $links = array('View All' => with_get_params(array('index')));
     } else {
-        $links = array('interested' => array('interested'));
+        $links = array('interested' => with_get_params(array('interested')));
     }
     $links = array_merge($links, array(
         'cache' => array('cache'),

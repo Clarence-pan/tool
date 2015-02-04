@@ -7,7 +7,7 @@
 <head>
     <style type="text/css">
         <?php echo file_get_contents(__DIR__.'/../log.css') ?>
-        form {
+        form, h3 {
             display: block;
             min-width: 50em;
             width: 50vw;

@@ -23,9 +23,9 @@ function filterLog(&$logItem, $interested){
         $prevRequest = $request;
     }
 
-    if (!$level == 'profile'
-        && in_array($category, array('system.db.CDbCommand.query', 'system.db.CDbCommand.execute'))
-        && in_array($msgHead, array('begin', 'end'))){
+    if ($level == 'profile'
+        or in_array($category, array('system.db.CDbCommand.query', 'system.db.CDbCommand.execute'))
+        or in_array($msgHead, array('begin', 'end'))){
         return true;
     }
 

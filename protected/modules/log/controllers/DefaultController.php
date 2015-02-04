@@ -46,4 +46,22 @@ class DefaultController extends Controller
         $this->render('help');
     }
 
+    public function actionDisableStackTrace(){
+        $this->actionEnableStackTrace(true);
+    }
+    public function actionEnableStackTrace($enable=true){
+        $file = 'D:\\workspaces\\framework\\my_yii_log.php';
+        $lines = file($file);
+        foreach ($lines as &$line) {
+            if (strpos($line, "define('YII_DEBUG_TRACE_STACK',") === 0){
+                $line = "define('YII_DEBUG_TRACE_STACK', $enable);".PHP_EOL;
+                break;
+            }
+        }
+        $result = implode(PHP_EOL, $lines);
+        file_put_contents($file, $result);
+        echo "<pre>";
+        echo $result;
+        echo "</pre>";
+    }
 }

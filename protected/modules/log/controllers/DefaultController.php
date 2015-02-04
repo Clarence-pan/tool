@@ -52,6 +52,7 @@ class DefaultController extends Controller
     public function actionEnableStackTrace($enable=true){
         $file = 'D:\\workspaces\\framework\\my_yii_log.php';
         $lines = file($file);
+        $enable = ($enable ? 'true' : 'false');
         foreach ($lines as &$line) {
             if (strpos($line, "define('YII_DEBUG_TRACE_STACK',") === 0){
                 $line = "define('YII_DEBUG_TRACE_STACK', $enable);".PHP_EOL;

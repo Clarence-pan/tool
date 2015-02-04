@@ -3,7 +3,7 @@
 $requests = array();
 $prevRequest = '';
 $summaryId = 0;
-function filterLog(&$logItem){
+function filterLog(&$logItem, $interested){
     global $prevRequest;
     global $requests;
     global $summaryId;
@@ -19,12 +19,7 @@ function filterLog(&$logItem){
 
     if ($request != $prevRequest && $_GET['sum']){
         if ($prevRequest){
-            $summary = get_summary_of_request($requests[$prevRequest]);
-            $style = get_style_of_request($prevRequest);
-            $summaryId++;
-            echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>Summary Of $prevRequest</h3><div class='summary'>$summary</div></div>";
-            echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
-            $requests[$prevRequest]['summary-id'] = $summaryId;
+            output_summary();
         }
         $prevRequest = $request;
     }
@@ -50,6 +45,10 @@ function filterLog(&$logItem){
         if (strpos($msgHead, $_GET['heading']) !== 0){
             return true;
         }
+    }
+
+    if (!$interested){
+        return false;
     }
 
     if ($category == 'CWebApplication' ){
@@ -87,14 +86,30 @@ function filterLog(&$logItem){
     return true;
 }
 
+/**
+ * 输出总结
+ */
+function output_summary() {
+    global $prevRequest;
+    global $requests;
+    global $summaryId;
+
+    $summary = get_summary_of_request($requests[$prevRequest]);
+    $style = get_style_of_request($prevRequest);
+    $summaryId++;
+    echo "<div class='summary-container' style='$style' id=\"summary-$summaryId\"><h3>Summary Of $prevRequest</h3><div class='summary'>$summary</div></div>";
+    echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
+    $requests[$prevRequest]['summary-id'] = $summaryId;
+
+    return array($summaryId, $requests);
+}
+
 function get_summary_of_request($request){
     $r = '<dl class="summary">';
     foreach (array('外部接口调用', 'Querying SQL', 'Executing SQL', 'memcache') as $name) {
         $sum = $request[$name];
         if ($sum['count']){
-            $r .= "<dt class='summary'>$name</dt>";
-            $r .= "<dd class=\"count\">count: ".$sum['count']."</dd>";
-            $r .= "<dt class='detail'>Detail: </dt>";
+            $r .= "<dt class='summary'>$name {$sum['count']} 次</dt>";
             foreach ($sum['rows'] as $line => $row) {
                 $row = htmlspecialchars($row);
                 if ($name == 'Querying SQL'){

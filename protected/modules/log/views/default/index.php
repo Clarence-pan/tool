@@ -19,10 +19,10 @@ function get_style_of_request($request) {
 
     return 'background-color: ' . $colors[$i];
 }
-function output_logs(log\models\ILog $log, $id, $limit) {
+function output_logs(log\models\ILog $log, $id, $limit, $interested) {
     for ($item = $log->next(), $i = 0; !$log->eof() && $i < $limit; $item = $log->next(), $id++, $i++):
         $item['line'] = $id + 1;
-        if (filterLog($item)) {
+        if (filterLog($item, $interested)) {
             continue;
         }
         ?>
@@ -52,11 +52,13 @@ function output_logs(log\models\ILog $log, $id, $limit) {
     <?PHP endif;
     endfor;
 
+    if ($_GET['sum']){
+        output_summary();
+    }
     return $id;
 }
 
-$filter = ((isset($filter) and $filter) ? $filter : 'basic');
-$this->renderPartial("/_filterLog_$filter");
+$this->renderPartial("/_filterLog");
 
 $log = new log\models\CacheLog();
 
@@ -87,7 +89,7 @@ if ($start) {
 }
 $pager = $this->renderPartial('pager', array('count' => $log->count(), 'start' => $start, 'limit' => $limit), true);
 echo $pager;
-output_logs($log, $start, $limit);
+output_logs($log, $start, $limit, $filter == 'interested');
 echo $pager;
 
 echo '<script type="application/javascript">

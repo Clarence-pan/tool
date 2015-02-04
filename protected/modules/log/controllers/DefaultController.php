@@ -47,7 +47,7 @@ class DefaultController extends Controller
     }
 
     public function actionDisableStackTrace(){
-        $this->actionEnableStackTrace(true);
+        $this->actionEnableStackTrace(false);
     }
     public function actionEnableStackTrace($enable=true){
         $file = 'D:\\workspaces\\framework\\my_yii_log.php';

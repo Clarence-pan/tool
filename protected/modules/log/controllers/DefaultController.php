@@ -59,10 +59,10 @@ class DefaultController extends Controller
                 break;
             }
         }
-        $result = implode(PHP_EOL, $lines);
+        $result = implode('', $lines);
         file_put_contents($file, $result);
         echo "<pre>";
-        echo $result;
+        echo htmlspecialchars($result);
         echo "</pre>";
     }
 }

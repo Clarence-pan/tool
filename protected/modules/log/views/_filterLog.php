@@ -115,8 +115,11 @@ function get_summary_of_request($request){
                 if ($name == 'Querying SQL'){
                     $dupClass = get_duplicated_class($row, $sum['rows']);
                 }
-                $url = (strstr($_SERVER['REQUEST_URI'], 'summary') ? 'index?' : '');
-                $r .= "<dd class='detail $dupClass'><a href=\"$url#line-$line\">$line</a>: $row</dd>";
+                if (strstr($_SERVER['REQUEST_URI'], 'summary')){
+                    $url = "index?start=$line&limit=1";
+                    $target = '_blank';
+                }
+                $r .= "<dd class='detail $dupClass'><a href=\"$url#line-$line\" target='$target'>$line</a>: $row</dd>";
             }
 
         }

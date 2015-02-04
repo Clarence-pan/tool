@@ -28,6 +28,7 @@ class CacheLog implements ILog{
     }
     public function clear(){
         $this->cache->set(self::LOG_ITEM_NUM, 0);
+        $this->cache->set('request-count', 0);
         $this->count = 0;
     }
     public function getCache($key){

@@ -110,8 +110,10 @@ li.line {
 }
 
 .detail {
-    font-size: x-small;
+    font-size: small;
     border-bottom: 1px solid darkgray;
+    display: none;
+    padding-top: 0.5em;
 }
 .summary-container{
     padding: 1em 3em;

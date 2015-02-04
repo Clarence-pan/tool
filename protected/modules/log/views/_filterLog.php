@@ -109,7 +109,7 @@ function get_summary_of_request($request){
     foreach (array('外部接口调用', 'Querying SQL', 'Executing SQL', 'memcache') as $name) {
         $sum = $request[$name];
         if ($sum['count']){
-            $r .= "<dt class='summary'>$name {$sum['count']} 次</dt>";
+            $r .= "<dt class='summary' onclick='toggle_detail(this)'>$name {$sum['count']} 次</dt>";
             foreach ($sum['rows'] as $line => $row) {
                 $row = htmlspecialchars($row);
                 if ($name == 'Querying SQL'){

@@ -231,3 +231,7 @@ function expandThisCell(e, evt){
 function toggle_very_brief(v){
     $('.line, .level, .category, .time').toggle(!v);
 }
+
+function toggle_detail(dt){
+    $(dt).nextUntil('dt').toggle();
+}

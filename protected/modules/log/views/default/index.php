@@ -30,7 +30,7 @@ function get_style_of_request($request) {
     return 'background-color: ' . $colors[$i];
 }
 function output_logs(log\models\ILog $log, $id, $limit, $interested, $summaryOnly) {
-    for ($item = $log->next(), $i = 0; !$log->eof() && $i < $limit; $item = $log->next(), $id++, $i++):
+    for ($item = $log->next(), $i = 0; !$log->eof() and (!$limit or $i < $limit); $item = $log->next(), $id++, $i++):
         $item['line'] = $id + 1;
         if (filterLog($item, $interested)) {
             continue;

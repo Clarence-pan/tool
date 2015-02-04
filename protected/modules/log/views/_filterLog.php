@@ -115,6 +115,8 @@ function get_summary_of_request($request){
                 $row = htmlspecialchars($row);
                 if ($name == 'Querying SQL'){
                     $dupClass = get_duplicated_class($row, $sum['rows']);
+                }else{
+                    $dupClass = '';
                 }
                 if (strstr($_SERVER['REQUEST_URI'], 'summary')){
                     $url = "index?start=".($_GET['start'] + $line - 1)."&limit=1";

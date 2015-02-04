@@ -91,6 +91,9 @@ function output_summary() {
     global $requests;
     global $summaryId;
 
+    if (!$prevRequest){
+        return;
+    }
     $summary = get_summary_of_request($requests[$prevRequest]);
     $style = get_style_of_request($prevRequest);
     $summaryId++;
@@ -99,7 +102,6 @@ function output_summary() {
     echo "<script type='text/javascript'>$(function(){ $('#summary-{$requests[$prevRequest]['summary-id']}').remove() });</script>";
     $requests[$prevRequest]['summary-id'] = $summaryId;
 
-    return array($summaryId, $requests);
 }
 
 function get_summary_of_request($request){

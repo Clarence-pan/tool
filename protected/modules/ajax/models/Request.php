@@ -124,4 +124,33 @@ class Request extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+    /**
+     * @return Response
+     */
+    public function doQuery(){
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $this->buildRealUrl());
+        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($curl);
+        $curlInfo = curl_getinfo($curl);
+
+        curl_close($curl);
+
+        $response = new Response();
+        $response->requestId = $this->id;
+        $response->body = $result;
+        $response->save();
+
+        return $response;
+    }
+
+
+    public function buildRealUrl(){
+        // todo
+        return $this->url;
+    }
 }

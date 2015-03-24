@@ -80,6 +80,10 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
+                array(
+                    'class'=>'CWebLogRoute',
+                    'levels'=>'error, warning, info, debug, trace',
+                ),
 			),
 		),
 	),

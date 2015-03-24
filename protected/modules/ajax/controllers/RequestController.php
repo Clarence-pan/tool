@@ -25,4 +25,19 @@ class RequestController extends Controller {
 
         $this->render('detail', array('request' => $request));
     }
+
+    public function actionQuery($id){
+        if (Yii::app()->request->requestType != 'POST'){
+            throw new CHttpException(500);
+        }
+
+        $request = Request::model()->findByPk($id);
+        if (empty($request)){
+            throw new CHttpException(404);
+        }
+
+        $response = $request->doQuery();
+
+        $this->render('detail', array('request' => $request, 'response' => $response));
+    }
 } 

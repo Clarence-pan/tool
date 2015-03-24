@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $request Request
+ * @var $response Response
  */
 
 ?>
@@ -10,7 +11,18 @@
     <div>
         Group: <?php echo $request->group->name ?>
     </div>
-    <?php foreach ($request->responses as $response) { ?>
-        <?php $this->widget('ResponseBox', array('response' => $response)) ?>
-    <?php } ?>
+    <?php
+    if ($response != null){
+        $this->widget('application.modules.ajax.widgets.ResponseBoxWidget', array('response' => $response));
+    } else if (empty($request->responses)) {
+        echo "<strong>No response yet. </strong>";
+    } else {
+        foreach ($request->responses as $response) {
+            $this->widget('application.modules.ajax.widgets.ResponseBoxWidget', array('response' => $response));
+        }
+    }
+    ?>
+    <form target="_self" action="<?php echo CHtml::normalizeUrl(array('request/query', 'id' => $request->id)) ?>" method="POST">
+        <input type="submit" value="-- Click To Query Response --">
+    </form>
 </div>

@@ -26,6 +26,7 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1', '192.168.111.1'),
 		),
         'log',
+        'ajax',
 	),
 
 	// application components
@@ -88,5 +89,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+        'hosts' => '/etc/hosts',
 	),
 );

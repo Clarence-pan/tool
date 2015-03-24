@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Tools',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -82,7 +82,7 @@ return array(
 				),
                 array(
                     'class'=>'CWebLogRoute',
-                    'levels'=>'error, warning, info, debug, trace',
+                    'levels'=>'*',
                 ),
 			),
 		),
@@ -92,7 +92,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'test@test.com',
         'hosts' => '/etc/hosts',
 	),
 );

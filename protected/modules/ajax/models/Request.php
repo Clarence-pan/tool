@@ -130,20 +130,29 @@ class Request extends CActiveRecord
      * @return Response
      */
     public function doQuery(){
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $this->buildRealUrl());
-        curl_setopt($curl, CURLOPT_HEADER, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        try{
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $this->buildRealUrl());
+            curl_setopt($curl, CURLOPT_HEADER, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-        $result = curl_exec($curl);
-        $curlInfo = curl_getinfo($curl);
+            $result = curl_exec($curl);
+            $curlInfo = curl_getinfo($curl);
+            curl_close($curl);
 
-        curl_close($curl);
-
-        $response = new Response();
-        $response->requestId = $this->id;
-        $response->body = $result;
-        $response->save();
+            $response = new Response();
+            $response->requestId = $this->id;
+            $response->header = substr($result, 0, $curlInfo['header_size']);
+            $response->body = substr($result, $curlInfo['header_size']);
+            $response->createTime = date('Y-m-d H:i:s');
+            $response->format = $curlInfo['content_type'];
+            $saved = $response->save();
+            if (!$saved){
+                var_dump($response);
+            }
+        } catch(Exception $e){
+            var_dump($e);
+        }
 
         return $response;
     }

@@ -31,6 +31,7 @@ class RequestController extends Controller {
             throw new CHttpException(500);
         }
 
+        /** @var Request $request */
         $request = Request::model()->findByPk($id);
         if (empty($request)){
             throw new CHttpException(404);

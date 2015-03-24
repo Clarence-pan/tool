@@ -12,6 +12,8 @@
  * @property string $createTime
  * @property string $lastQueryTime
  * @property string $groupId
+ * @property array $responses
+ * @property Group $group
  */
 class Request extends CActiveRecord
 {
@@ -47,10 +49,12 @@ class Request extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		);
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'group' => array(self::BELONGS_TO, 'Group', 'id'),
+            'responses' => array(self::HAS_MANY, 'Response', 'requestId'),
+        );
 	}
 
 	/**

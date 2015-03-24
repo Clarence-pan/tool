@@ -6,8 +6,11 @@ class DefaultController extends Controller
         parent::init();
         $this->layout = '/layout/main';
     }
+
 	public function actionIndex()
 	{
-		$this->render('index');
+        $groups = Group::model()->findAll();
+		$this->render('index',array('groups' => $groups));
 	}
+
 }

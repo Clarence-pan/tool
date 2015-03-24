@@ -38,6 +38,11 @@ function filterLog(&$logItem, $interested){
             return true;
         }
     }
+    if ($_GET['title']){
+        if (strpos($msgHead, $_GET['title']) === false){
+            return true;
+        }
+    }
     if ($_GET['heading']){
         if (strpos($msgHead, $_GET['heading']) !== 0){
             return true;

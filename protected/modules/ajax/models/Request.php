@@ -30,6 +30,7 @@ class Request extends CActiveRecord
 	 */
 	public function rules()
 	{
+        // TODO: check method should be uppercase
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
@@ -88,8 +89,6 @@ class Request extends CActiveRecord
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
@@ -132,9 +131,31 @@ class Request extends CActiveRecord
     public function doQuery(){
         try{
             $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $this->buildRealUrl());
+            $param = $this->buildRealParam();
+
+            $this->method = strtoupper($this->method);
+            if ($this->method == self::METHOD_GET && $param){
+                $uri = $this->url .'?'. $param;
+            } else {
+                $uri = $this->url;
+            }
+
+            curl_setopt($curl, CURLOPT_URL, $uri);
             curl_setopt($curl, CURLOPT_HEADER, true);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            switch ($this->method){
+                case self::METHOD_POST:
+                    curl_setopt($curl, CURLOPT_POST, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $param);
+                    break;
+
+                case self::METHOD_GET:
+                    break;
+
+                default:
+                    throw new HttpInvalidParamException('Invalid request method: '. $this->method);
+            }
 
             $result = curl_exec($curl);
             $curlInfo = curl_getinfo($curl);
@@ -149,17 +170,50 @@ class Request extends CActiveRecord
             $saved = $response->save();
             if (!$saved){
                 var_dump($response);
+                throw new HttpException('Save failed!');
             }
         } catch(Exception $e){
             var_dump($e);
+            throw new HttpException($e->getMessage());
         }
 
         return $response;
     }
 
 
-    public function buildRealUrl(){
-        // todo
-        return $this->url;
+    /**
+     * @return string 构造出来的参数
+     * @throws HttpInvalidParamException
+     */
+    public function buildRealParam(){
+        if ($this->params){
+            switch ($this->paramsFormat){
+                case self::PARAM_FORMAT_RAW:
+                    return $this->params;
+                case self::PARAM_FORMAT_BASE64JSON:
+                    if (!json_decode($this->params)){
+                        throw new HttpInvalidParamException("Invalid params: ".$this->params);
+                    }
+                    return base64_encode(json_encode(json_decode($this->params)));
+                default:
+                    throw new HttpInvalidParamException("Unknown format: ".$this->paramsFormat);
+            }
+        }
+        return '';
     }
+
+
+    /**
+     * 参数的格式
+     */
+    const PARAM_FORMAT_RAW = 'raw';
+    const PARAM_FORMAT_BASE64JSON = 'base64json';
+
+    /**
+     * 请求的方式
+     */
+    const METHOD_GET = 'GET';
+    const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
+    const METHOD_DELETE = 'DELETE';
 }

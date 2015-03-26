@@ -103,4 +103,16 @@ class Group extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function add(Request $request){
+        $request->groupId = $this->id;
+        return $request->save();
+    }
+
+    public function remove(Request $request){
+        $request->groupId = self::DEFAULT_GROUP_ID;
+        return $request->save();
+    }
+
+    const DEFAULT_GROUP_ID = 1;
 }

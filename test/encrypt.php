@@ -1,8 +1,8 @@
 <?php
-array_walk(explode(' ', 'openssl_encrypt mcrypt_encrypt openssl_public_encrypt'),
-    function($func){
-        echo $func . (function_exists($func) ? ' ':' NOT ').'support!'.PHP_EOL;
-    });
+
+if (!extension_loaded('mcrypt')){
+    die('Need mcrypt extension.');
+}
 
 /**
  * 密码员，对mcrypt进行封装，使加密和解密变得更加简单
@@ -54,9 +54,11 @@ class Cryptographer
     public function encrypt($text)
     {
         $ivSize = mcrypt_get_iv_size($this->algorithm, $this->mode);
-        echo 'IV size: '.$ivSize.PHP_EOL;
-        // 创建初始向量的时候，如果使用MCRYPT_DEV_RANDOM可能会安全点，但是速度会比MCRYPT_RAND慢很多
+
+        // 使用MCRYPT_RAND产生初始向量一般就足够安全了 —— 如果使用MCRYPT_DEV_RANDOM可能会更安全点，但是速度会比MCRYPT_RAND慢很多
         $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
+
+        // 加密数据
         $encryptedData = mcrypt_encrypt($this->algorithm, $this->key, $text, $this->mode, $iv);
         if ($encryptedData === false){
             return false;

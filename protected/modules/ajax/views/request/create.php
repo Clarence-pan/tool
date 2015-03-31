@@ -17,7 +17,13 @@
         </label>
         <label>
             Format:
-            <?php echo CHtml::listBox('paramsFormat', $request->paramsFormat, array(Request::PARAM_FORMAT_RAW, Request::PARAM_FORMAT_BASE64JSON), array('size' => 1)) ?>
+            <?php
+            echo CHtml::listBox('paramsFormat', $request->paramsFormat,
+                                array(
+                                    Request::PARAM_FORMAT_RAW => Request::PARAM_FORMAT_RAW,
+                                    Request::PARAM_FORMAT_BASE64JSON => Request::PARAM_FORMAT_BASE64JSON
+                                ),
+                                array('size' => 1)) ?>
         </label>
     </div>
     <textarea name="params" rows="10" cols="140" placeholder="Enter params here..."><?php echo $request->params ?></textarea>

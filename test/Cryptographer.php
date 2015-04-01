@@ -35,7 +35,7 @@ class Cryptographer
      * @param string $algorithm 加密算法，推荐AES
      * @param string $mode 加密模式，推荐CBC，不支持stream
      */
-    public function __construct($key, $algorithm = self::DEFAULT_ALGORITHM, $mode = self::DEFAULT_MODE)
+    public function __construct($key, $algorithm = MCRYPT_RIJNDAEL_128, $mode = MCRYPT_MODE_CBC)
     {
         $this->key = $key;
         $this->algorithm = $algorithm;
@@ -83,16 +83,6 @@ class Cryptographer
         $text = mcrypt_decrypt($this->algorithm, $this->key, $encryptedData, $this->mode, $iv);
         return rtrim($text, "\0");
     }
-
-    /**
-     * string 默认加密算法，RIJNDAEL即AES，128位密码足够安全了
-     */
-    const DEFAULT_ALGORITHM = MCRYPT_RIJNDAEL_128;
-
-    /**
-     * string 默认加密模式，推荐使用CBC，安全性高
-     */
-    const DEFAULT_MODE   = MCRYPT_MODE_CBC;
 
     /**
      * @var string 密码

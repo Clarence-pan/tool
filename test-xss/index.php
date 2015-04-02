@@ -4,7 +4,10 @@ $docFile = __DIR__ . '/productDetail.html';
 if ($_GET['productDetail']) {
     file_put_contents($docFile, $_GET['productDetail']);
     unset($_GET['productDetail']);
-    header('Location: http://tool.pcy.tuniu.org/test-xss/index.php?' . http_build_query($_GET));
+    if (!$requestUrl){
+        $requestUrl = 'http://tool.pcy.tuniu.org/test-xss/index.php';
+    }
+    header('Location: '.$requestUrl.'?' . http_build_query($_GET));
     die;
 } else {
     $_GET['productDetail'] = file_get_contents($docFile);
@@ -30,14 +33,16 @@ if ($_GET['security']) {
 }
 
 if ($_GET['purify']) {
-    require __DIR__ . '/htmlpurifier/library/HTMLPurifier.auto.php';
-    $config = HTMLPurifier_Config::createDefault();
-    $purifier = new HTMLPurifier($config);
+    if (!$purifier){
+        require __DIR__ . '/htmlpurifier/library/HTMLPurifier.auto.php';
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+    }
     $_GET['productDetail'] = $purifier->purify($_GET['productDetail']);
 }
 
 ?>
-<script type="application/javascript" src="/static/js/jquery.js"></script>
+<script type="application/javascript" src="http://tool.pcy.tuniu.org/static/js/jquery.js"></script>
 <style>
     .box {
         float: left;

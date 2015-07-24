@@ -94,7 +94,7 @@ if (@$_REQUEST['clear']) {
     if (@$_REQUEST['clear'] >= $log->count() || @$_REQUEST['clear'] == 'all') {
         $log->clear();
         echo "Clear finished!";
-
+        echo "<script>window.history.pushState({}, 'Log Cleared', '/log#log-cleared');</script>";
         return;
     } else {
         echo "Already cleared! The following is new one: ";

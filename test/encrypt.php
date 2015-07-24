@@ -122,44 +122,44 @@ function test_encrypt($key, $data, $algorithm, $mode) {
 // 3. 考虑到MYSQL的存储方便性，对生成的密文进行了BASE64编码，编后的长度这样计算：
 //       编码后长度 = 向下取整((编码前长度 + 2) / 3) * 4
 //       $encodedLen = floor(($dataLen + 2) / 3) * 4
-call_user_func(function() use ($algorithms, $modes){
-    // 固定长度的密码,
-    $tests = array_map(function($i){
-            return array(generate_random_string(10), generate_random_string($i));
-        }, range(1, 50, 1));
-
-    $calcBase64EncodeLen = function($x){
-        return intval(floor(($x + 2) / 3) * 4);
-    };
-
-    $calcBlockEncryptLen = function($dataLen, $blockLen){
-        return intval(floor(($dataLen + $blockLen - 1) / $blockLen) * $blockLen);
-    };
-
-    // NOO
-    echo "algorithm, mode, data_len, encrypt_len, IV_len, encrypted".PHP_EOL;
-    foreach ($algorithms as $algorithm) {
-        foreach ($modes as $mode) {
-            foreach ($tests as $oneTest) {
-                list($key, $data) = $oneTest;
-                list($pass, $encryptedLen, $encrypted) = test_encrypt($key, $data, $algorithm, $mode);
-                $result[] = array('algorithm' => $algorithm, 'mode' => $mode, 'pass' => $pass);
-                $keyLen = strlen($key);
-                $dataLen = strlen($data);
-                $ivLen = mcrypt_get_iv_size($algorithm, $mode);
-                $encryptedHex = bin2hex($encrypted);
-                if (in_array($mode, array('ofb', 'cfb', 'nofb'))){
-                    kassert($encryptedLen === $calcBase64EncodeLen($ivLen + $dataLen));
-                } else {
-                    kassert($encryptedLen === $calcBase64EncodeLen($ivLen + $calcBlockEncryptLen($dataLen, $ivLen)));
-                    echo "$algorithm, $mode, $dataLen, $encryptedLen, $ivLen, $encrypted".PHP_EOL;
-                }
-            }
-        }
-    }
-
-    die;
-});
+//call_user_func(function() use ($algorithms, $modes){
+//    // 固定长度的密码,
+//    $tests = array_map(function($i){
+//            return array(generate_random_string(10), generate_random_string($i));
+//        }, range(1, 50, 1));
+//
+//    $calcBase64EncodeLen = function($x){
+//        return intval(floor(($x + 2) / 3) * 4);
+//    };
+//
+//    $calcBlockEncryptLen = function($dataLen, $blockLen){
+//        return intval(floor(($dataLen + $blockLen - 1) / $blockLen) * $blockLen);
+//    };
+//
+//    // NOO
+//    echo "algorithm, mode, data_len, encrypt_len, IV_len, encrypted".PHP_EOL;
+//    foreach ($algorithms as $algorithm) {
+//        foreach ($modes as $mode) {
+//            foreach ($tests as $oneTest) {
+//                list($key, $data) = $oneTest;
+//                list($pass, $encryptedLen, $encrypted) = test_encrypt($key, $data, $algorithm, $mode);
+//                $result[] = array('algorithm' => $algorithm, 'mode' => $mode, 'pass' => $pass);
+//                $keyLen = strlen($key);
+//                $dataLen = strlen($data);
+//                $ivLen = mcrypt_get_iv_size($algorithm, $mode);
+//                $encryptedHex = bin2hex($encrypted);
+//                if (in_array($mode, array('ofb', 'cfb', 'nofb'))){
+//                    kassert($encryptedLen === $calcBase64EncodeLen($ivLen + $dataLen));
+//                } else {
+//                    kassert($encryptedLen === $calcBase64EncodeLen($ivLen + $calcBlockEncryptLen($dataLen, $ivLen)));
+//                    echo "$algorithm, $mode, $dataLen, $encryptedLen, $ivLen, $encrypted".PHP_EOL;
+//                }
+//            }
+//        }
+//    }
+//
+//    die;
+//});
 
 
 // 测试哪些算法可用

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubble Sort</title>
+</head>
+<body>
+<script>
+    var compare = function(x, y){
+        console.log("compare %o, %o", x, y);
+        return x - y;
+    };
+    var swap = function(array, i, j){
+        var t = array[i];
+        array[i] = array[j];
+        array[j] = t;
+        console.log("swap [%o], [%o]", i, j);
+    };
+    var bubbleSort = function(array){
+        for (var i = 0; i < array.length; i++) {
+            for (var j = 0; j < array.length - i - 1; j++) {
+                if (compare(array[j], array[j + 1]) > 0) {
+                    swap(array, j, j + 1);
+                }
+            }
+        }
+    };
+
+    var data = [4, 3, 1, 2, 5];
+    console.log(data);
+    bubbleSort(data);
+    console.log(data);
+
+    function async(func){
+        return func;
+    }
+
+    function await(func){
+        return func;
+    }
+
+    var compare = async(function(x, y){
+        console.log("compare %o, %o", x, y);
+        return x - y;
+    });
+    var swap = async(function(array, i, j){
+        var t = array[i];
+        array[i] = array[j];
+        array[j] = t;
+        console.log("swap [%o], [%o]", i, j);
+    });
+    var bubbleSort = async(function(array){
+        for (var i = 0; i < array.length; i++) {
+            for (var j = 0; j < array.length - i - 1; j++) {
+                if (await(compare(array[j], array[j + 1])) > 0) {
+                    await(swap(array, j, j + 1));
+                }
+            }
+        }
+    });
+
+    var data = [4, 3, 1, 2, 5];
+    console.log(data);
+    bubbleSort(data);
+    console.log(data);
+</script>
+
+</body>
+</html>

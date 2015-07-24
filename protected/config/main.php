@@ -27,6 +27,7 @@ return array(
 		),
         'log',
         'ajax',
+        'json',
 	),
 
 	// application components
@@ -80,10 +81,6 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-                array(
-                    'class'=>'CWebLogRoute',
-                    'levels'=>'*',
-                ),
 			),
 		),
 	),

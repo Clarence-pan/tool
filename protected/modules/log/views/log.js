@@ -183,10 +183,10 @@ function bindExpander(code){
 
 		var expander = $('<span class="expander">(...) <i>// </i></span>');
 		expander.appendTo(prevLine);
-		expander.append($('<i></i>').text(content.text().substring(0, 90)+'...'));
-		expander.css(expanderCss).css({
-			'white-space': 'initial'
-		});
+        var compressedContent = content.text().replace(/\s+/g, " ");
+		expander.append($('<i></i>').text(compressedContent.length > 90 ? compressedContent.substring(0, 90)+'...' : compressedContent));
+        expander.find('i').css({color: 'green'});
+		expander.css(expanderCss);
 		expander.on('click', function(){
 			wrapper.show();
 			expander.remove();

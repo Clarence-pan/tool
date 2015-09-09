@@ -105,16 +105,31 @@ function scrollToTop(){
     window.scrollTo(0, 0);
 }
 function showInNewWindow(e){
-    if (e.innerHTML.trim()[0] == '<'){
-        e.innerHTML = e.innerText;
+    var code = e.innerHTML.trim();
+    if (code[0] == '<'){
+        code = e.innerText.trim();
+    }
+//
+//    if (code.split("\n").length > 3){
+//        var x = window.open('', '_blank');
+//        x.document.body.innerHTML = '<pre>' + code + '</pre>';
+//        bindExpander($(x.document.body).children('pre'));
+//    }
+
+    postToJsonViewer(code);
+}
+
+function postToJsonViewer(code){
+    var $poster = $('#json-viewer-poster');
+    if ($poster.size() == 0){
+        $poster = $('<form id="json-viewer-poster" style="display:none;" method="POST" target="_blank" action="/json/view" ></form>').appendTo('body');
+        $poster.append('<textarea name="data"></textarea>');
     }
 
-    if (e.innerHTML.split("\n").length > 3){
-        var x = window.open('', '_blank');
-        x.document.body.innerHTML = '<pre>'+e.innerHTML+'</pre>';
-        bindExpander($(x.document.body).children('pre'));
-    }
+    $poster.find('textarea').val($("<div></div>").html(code).text());
+    $poster.submit();
 }
+
 function bindExpander(code){
     if (!code.text().trim().match(/array/i)){
         return;

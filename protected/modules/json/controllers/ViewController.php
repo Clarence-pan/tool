@@ -14,8 +14,11 @@ class ViewController extends Controller
                     $text = add_commas($text);
                     $json = eval("return {$text};");
                     if (!$json){
-                        print_r(error_get_last());
-                        echo $text;
+                        $this->render('error', array(
+                            'error' => error_get_last(),
+                            'text' => $text
+                        ));
+                        return;
                     }
                 }
             }

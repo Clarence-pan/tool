@@ -265,10 +265,13 @@ function on_got_output(response, request){
         base64: base64,
         json: json,
         jsonPretty: jsonPretty,
-        raw: request.text,
+        raw: response.text,
         elapsedTimeInSeconds: response.elapsedTimeInSeconds
     }, request);
-    $('#output').html($('#log .log-item:first .response').html()).show();
+
+    var $output = $('#output').html($('#log .log-item:first .response').html()).show();
+    $output.find('h3,h4').initExpander(true);
+    $output.find('h4:not(:first)').trigger('shrink');
 }
 
 /**

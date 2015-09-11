@@ -7,30 +7,32 @@
 </head>
 <body>
 <div class="content">
-    <select id="method">
-        <option value="GET">GET</option>
-        <option value="POST">POST</option>
-    </select>
-    <input type="text" id="url" placeholder="please input url.." />
-    <br/>
-    <label>With parameters:</label><br/>
-    <textarea id="param" rows="15"></textarea> <br/>
-    <input type="button" value="SEND" onclick="javascript:send_request();"/>
-    <input type="button" value="Split URL" onclick="javascript:split_url();"/>
-    <input type="button" value="Decode PARAM" onclick="javascript:decode_param();"/>
-    <input type="button" value="Encode PARAM" onclick="javascript:encode_param();"/>
-    <input type="button" value="Format JSON" onclick="javascript:format_json();"/>
-    <input type="button" value="Undo" onclick="javascript:undo_it();"
-           title="Are your regretting? Click here to undo it."/>
-    <input type="button" value="Redo" onclick="javascript:redo_it();"
-           title="Are your regretting of having undone something? Click here to redo it."/>
-    <br/>
-    <div id="status"></div>
-    <div id="output" class="" style="display: none">
+    <div class="main center">
+        <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+        </select>
+        <input type="text" id="url" placeholder="please input url.." />
+        <br/>
+        <label>With parameters:</label><br/>
+        <textarea id="param" rows="15"></textarea> <br/>
+        <input type="button" value="SEND" onclick="javascript:send_request();"/>
+        <input type="button" value="Split URL" onclick="javascript:split_url();"/>
+        <input type="button" value="Decode PARAM" onclick="javascript:decode_param();"/>
+        <input type="button" value="Encode PARAM" onclick="javascript:encode_param();"/>
+        <input type="button" value="Format JSON" onclick="javascript:format_json();"/>
+        <input type="button" value="Undo" onclick="javascript:undo_it();"
+               title="Are your regretting? Click here to undo it."/>
+        <input type="button" value="Redo" onclick="javascript:redo_it();"
+               title="Are your regretting of having undone something? Click here to redo it."/>
+        <br/>
+        <div id="status"></div>
+        <div id="output" class="" style="display: none">
+        </div>
+        <hr/>
+        <h2>History:</h2>
+        <div id="log"></div>
     </div>
-    <hr/>
-    <h2>History:</h2>
-    <div id="log"></div>
 </div>
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script type="text/javascript" src="../../js/external/jquery.indexeddb.js"></script>

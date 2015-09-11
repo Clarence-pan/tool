@@ -28,9 +28,6 @@ h4{
 .json{
     white-space: pre;
 }
-textarea{
-    width: 80vw;
-}
 .log-item{
     margin: 0.5em;
     padding: 0.5em;
@@ -99,4 +96,35 @@ textarea{
 }
 .time-elapsed{
     float: right;
+}
+.center{
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+}
+.main{
+    display: block;
+    margin: -1.5em 0 0 0;
+    max-width: 1000px;
+    min-width: 500px;
+}
+#param{
+    display: block;
+    width: 100%;
+}
+#method{
+    display: block;
+    width: 5em;
+    float: left;
+    position: relative;
+    top: 1.5em;
+    z-index: 2;
+}
+#url{
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding-left: 5em;
+    position: relative;
+    z-index: 1;
 }

@@ -1,32 +1,3 @@
-$(function(){
-    // 调整样式
-    $(window).on('resize',function(){
-        var $url = $('#url');
-        var $method = $('#method');
-        var $param = $('#param');
-        var $content = $('.content');
-        var $window = $(window);
-        var MAX_WIDTH = 1000;
-        if ($window.width() > MAX_WIDTH){
-            $content.css({
-                width: MAX_WIDTH,
-                'margin-left': ($window.width() - MAX_WIDTH) / 2
-            });
-        } else {
-            $content.css({
-                width: 'auto',
-                'margin-left': 'auto'
-            })
-        }
-
-        $url.css('width', $content.width() - $method.width() - 45);
-        $param.css('width', $method.width() + $url.width() + 10);
-    });
-    setTimeout(function(){
-        $(window).trigger('resize');
-    }, 200);
-});
-
 function EncodeDecodeHistory(){
     var self = this;
     self.data = { name: 'EncodeDecodeHistory', history: [] };

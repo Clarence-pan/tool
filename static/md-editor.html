@@ -135,7 +135,7 @@
         // set auto saving
         setInterval(function(){
             localStorage[getNoteName()] = aceEditor.getValue();
-            var noty = $('<div class="noty"></div>').text('保存成功').hide().prependTo('body').fadeIn();
+            var noty = $('<div class="noty"></div>').text('saved').hide().prependTo('body').fadeIn();
             setTimeout(function(){ noty.fadeOut().remove(); }, 1500);
         }, 3000);
 

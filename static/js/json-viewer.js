@@ -89,6 +89,7 @@
             trigger.on('click', function(){
                 trigger.trigger('toggle-expand');
             });
+            trigger.css({cursor: 'pointer'});
         });
         if (!defaultExpand){
             triggers.trigger('shrink');

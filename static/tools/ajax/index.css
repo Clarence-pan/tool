@@ -39,8 +39,12 @@ textarea{
 #log-item-template-wrapper{
     display: none;
 }
-.log-item .delBtn{
-    margin-left: 4em;
+.log-item button{
+    float: right;
+    cursor: pointer;
+}
+.log-item button:hover{
+    color: #ff8000;
 }
 .param{
     max-width: 90vw;
@@ -77,4 +81,22 @@ textarea{
     border: none;
     cursor: pointer;
     background: transparent;
+}
+.request, .response{
+    padding-left: 2em;
+}
+#status{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 0 1em;
+    margin: 0;
+    border: none;
+
+    background-color: #000000;
+    color: #fff;
+    z-index: 999999;
+}
+.time-elapsed{
+    float: right;
 }

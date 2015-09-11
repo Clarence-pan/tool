@@ -4,8 +4,6 @@ var ToolsCfg = getCurrentScriptConfig({
     footer: true
 });
 
-console.log('config: %o', ToolsCfg);
-
 // load js, if needed
 if (!window.$){
     (function(){

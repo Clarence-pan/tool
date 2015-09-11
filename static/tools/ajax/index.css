@@ -14,9 +14,7 @@ h4{
     margin: 0;
     font-size: 100%;
 }
-body{
-    background-color: #d3d3d3;
-}
+
 .output{
     border-top: gray solid 1px;
     /*overflow: auto;*/

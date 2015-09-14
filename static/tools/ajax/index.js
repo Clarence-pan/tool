@@ -126,7 +126,7 @@ function parseJson(code, throws){
 }
 function send_request(){
     var ajaxOptions = {
-        type: $("#method").val(),
+        type: $("#method").val()
     };
     var url = $("#url").val();
     var param = $("#param").val().trim();
@@ -479,3 +479,8 @@ function MyDbStore(dbName, storeName){
 $(function(){
     $('h1,h2,h3,h4,h').initExpander(true);
 });
+
+
+if (/\.net/i.test(navigator.appVersion)){
+    window.alert('Chrome and firefox are recommended for you to get the best browsing experience.');
+}

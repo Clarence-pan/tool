@@ -6,7 +6,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-	'ToolsBasePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Tools',
 
 	// preloading 'log' component

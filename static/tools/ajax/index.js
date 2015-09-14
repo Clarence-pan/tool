@@ -434,7 +434,7 @@ function MyDbStore(dbName, storeName){
             dfd.reject(e);
         });
         return dfd.promise();
-    }
+    };
 
     self.each = function(iterator){
         return db.transaction([storeName]).then(function () {
@@ -480,7 +480,3 @@ $(function(){
     $('h1,h2,h3,h4,h').initExpander(true);
 });
 
-
-if (/\.net/i.test(navigator.appVersion)){
-    window.alert('Chrome and firefox are recommended for you to get the best browsing experience.');
-}

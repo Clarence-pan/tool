@@ -6,6 +6,7 @@ $(function(){
     var $result = $('#result');
     var $refreshBtn = $('#refreshBtn');
     var $download = $('#download');
+    var $newWindow = $('#newWindow');
     var $updateIndicator = $('.update-indicator');
     var resultTemplate = new EJS({url: 'result.ejs'});
     var idleTimerId = 0;
@@ -24,6 +25,7 @@ $(function(){
 
         var resultUrl = URL.createObjectURL(new Blob([resultHtml], {type:'text/html'}));
         $download[0].href = resultUrl;
+        $newWindow[0].href = resultUrl;
         $result[0].contentWindow.location = resultUrl;
 
         $updateIndicator.removeClass('dirty').addClass('updated');

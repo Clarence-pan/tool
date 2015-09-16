@@ -1,3 +1,7 @@
+
+.wrapper{
+    position: relative;
+}
 .main{
     width: 100%;
     min-width: 50em;
@@ -18,16 +22,17 @@
     padding-right: 1em;
 }
 
-textarea, iframe{
+.box > pre, .box > textarea, .box > iframe{
     display: block;
     width: 100%;
-    height: 20em;
+    min-height: 20em;
+    height: auto;
 }
 
 .update-indicator{
     border-width: 1px;
     border-style: solid;
-    border-color: transparent;
+    border-color: #d3d3d3;
 }
 
 @keyframes update{

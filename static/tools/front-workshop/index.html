@@ -5,30 +5,33 @@
     <title>Front Workshop</title>
 </head>
 <body>
+<div class="wrapper">
     <div class="main">
-        <div class="html box">
-            <a href="javascript:void(0)">HTML</a>
-            <textarea id="html" autofocus="autofocus" tabindex="1"></textarea>
+        <div class="html box" id="html-box">
+            <a href="javascript:void(0)" draggable="false">HTML</a>
+            <pre id="html" autofocus="autofocus" tabindex="1"></pre>
         </div>
-        <div class="result box">
-            <a href="javascript:void(0)">Result</a>
+        <div class="result box" id="result-box">
+            <a href="javascript:void(0)" draggable="false">Result</a>
             <a id="download" href="javascript:void(0)" download="test.html" >Download</a>
-            <a id="refreshBtn" href="javascript:void(0)">Refresh</a>
+            <a id="refreshBtn" href="javascript:void(0)" draggable="false">Refresh</a>
             <iframe id="result" class="update-indicator"></iframe>
         </div>
-        <div class="css box">
-            <a href="javascript:void(0)">CSS</a>
-            <textarea id="css" tabindex="2"></textarea>
+        <div class="css box" id="css-box">
+            <a href="javascript:void(0)" draggable="false">CSS</a>
+            <pre id="css" tabindex="2"></pre>
         </div>
-        <div class="javascript box">
-            <a href="javascript:void(0)">Javascript</a>
-            <textarea id="javascript" tabindex="3"></textarea>
+        <div class="javascript box" id="javascript-box">
+            <a href="javascript:void(0)" draggable="false">Javascript</a>
+            <pre id="javascript" tabindex="3"></pre>
         </div>
     </div>
     <div class="clearfix"></div>
     <div id="error-report"></div>
+</div>
 </body>
 <script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../ace/ace.js" charset="utf-8"></script>
 <script type="text/javascript" src="../../js/ejs/ejs_production.js"></script>
 <script type="text/javascript" src="../common/common.js"></script>
 <script type="text/javascript" src="index.js"></script>

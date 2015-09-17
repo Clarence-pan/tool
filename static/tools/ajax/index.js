@@ -290,7 +290,11 @@ function render_and_prepend_log(data, opt) {
 
 function initExpanderForLogItem($logItem){
     $logItem.find('h3,h4').initExpander(true);
-    $logItem.find('.response h4:not(:eq(1))').trigger('shrink');
+    if ($logItem.find('.response').size() > 0){
+        $logItem.find('.response h4:not(:eq(1))').trigger('shrink');
+    } else {
+        $logItem.find('h4:not(:eq(1))').trigger('shrink');
+    }
 }
 
 function log_it(response, request){

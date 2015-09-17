@@ -1,16 +1,49 @@
-.json-viewer{
-    font-size: 10px;
-}
-
-.json-viewer .object, .json-viewer .array{
-    clear: both;
-}
 .json-viewer .object > .object-begin,
 .json-viewer .array > .array-begin
 {
+    position: relative;
     clear: both;
     margin-left: 0;
+    cursor: pointer;
 }
+.json-viewer .object > .object-begin:hover,
+.json-viewer .array > .array-begin:hover,
+.json-viewer .object > .object-begin:hover .key,
+.json-viewer .array > .array-begin:hover .key
+{
+    color: #FF4500;
+    text-decoration: underline;
+}
+.json-viewer .object > .object-begin:before,
+.json-viewer .array > .array-begin:before{
+    display: inline-block;
+    content: ' ';
+    box-sizing: content-box;
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    position: absolute;
+    top: 0.2em;
+    left: -1em;
+
+    border-color: transparent transparent transparent #000000;
+}
+.json-viewer .object > .object-begin.expanded:before,
+.json-viewer .array > .array-begin.expanded:before{
+    border-color: #000000 transparent transparent transparent;
+    top: 0.5em;
+}
+
+.json-viewer .object > .object-begin:hover:before,
+.json-viewer .array > .array-begin:hover:before{
+    border-color: transparent transparent transparent #FF4500;
+}
+.json-viewer .object > .object-begin.expanded:hover:before,
+.json-viewer .array > .array-begin.expanded:hover:before{
+    border-color: #FF4500 transparent transparent transparent;
+}
+
 .json-viewer .object > .object-end,
 .json-viewer .array > .array-end
 {
@@ -26,15 +59,26 @@
 
 .json-viewer .object:hover, .json-viewer .array:hover{
     background-color: #fff;
-
 }
 
+.json-viewer .key{
+    color: #0000ff;
+}
 
-.json-viewer .object > .object-item > .key,
-.json-viewer .object > .object-item > .delimiter,
-.json-viewer .object > .object-item > .value
-{
-    float: left;
+.json-viewer .string{
+    color: #008000;
+}
+
+.json-viewer .boolean{
+    color: #000099;
+}
+
+.json-viewer .number{
+    color: orangered;
+}
+
+.json-viewer .comment{
+    color: #6d6d6d;
 }
 
 .icon{

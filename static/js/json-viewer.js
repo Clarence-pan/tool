@@ -29,6 +29,7 @@
         self.$root = $('<div></div>').append(createJsonNode(self.json));
         self.$root.addClass('json-viewer').appendTo(self.renderTo.empty());
         self.$root.find('.object-end:last').text('}');
+        bindJsonExpander(self.$root);
         return this;
     }
 
@@ -84,7 +85,7 @@
         if (info.title) {
             if (info.type == 'array'){
                 var $list = $('<div class="array"></div>');
-                $('<div class="array-begin">[</div>').appendTo($list);
+                $('<div class="array-begin expanded">[</div>').appendTo($list);
                 $.each(obj, function(i, v){
                    $('<div class="array-item"></div>').append(createJsonNode(v)).appendTo($list);
                 });
@@ -92,13 +93,22 @@
                 return $list;
             } else { // object
                 var $list = $('<div class="object"></div>');
-                $('<div class="object-begin">{</div>').appendTo($list);
+                $('<div class="object-begin expanded">{</div>').appendTo($list);
                 $.each(obj, function(k, v){
-                    $('<div class="object-item"></div>')
-                        .append($('<div class="key"></div>').text(k).attr('title', 'type: ' + getTypeOf(v)))
-                        .append('<div class="delimiter">: </div>')
-                        .append($('<div class="value"></div>').append(createJsonNode(v)))
-                        .appendTo($list);
+                    var valType = getTypeOf(v);
+                    if (valType == 'object' || valType == 'array'){
+                        var $val = createJsonNode(v);
+                        var $valBegin = $val.find(valType == 'object' ? '.object-begin:first' : '.array-begin:first');
+                        $valBegin.prepend('<span class="key">' + k + '</span><span class="delimiter">: </span>');
+                        $('<div class="object-item"></div>').append($val).appendTo($list);
+                    } else {
+                        $('<div class="object-item"></div>')
+                            .append('<span class="key">' + k + '</span><span class="delimiter">: </span>')
+                            .append($('<span class="value"></span>').text(JSON.stringify(v)).addClass(valType))
+                            .append(',')
+                            .appendTo($list);
+                    }
+
                 });
                 $('<div class="object-end">},</div>').appendTo($list);
                 return $list;
@@ -106,6 +116,24 @@
         } else {
             return $("<div><div>").append($('<span></span>').text(info.body).attr('title', 'type: ' + info.type).attr('class', info.type)).append(',');
         }
+    }
+
+    function bindJsonExpander($container){
+        $container.on('click', '.array-begin, .object-begin', function(){
+            var $this = $(this);
+            var $end = $this.siblings($this.is('.array-begin') ? '.array-end' : '.object-end');
+            $this.trigger($end.is(':visible') ? 'shrink' : 'expand');
+        }).on('shrink', '.array-begin, .object-begin', function(){
+            var $this = $(this);
+            var $end = $this.siblings($this.is('.array-begin') ? '.array-end' : '.object-end');
+            $this.data('original-html', $this.html());
+            $this.append('...' + $end.text() + '<span class="comment"> //' + ($this.siblings().size() - 1) + ' item(s)</span>').removeClass('expanded');
+            $this.siblings().hide();
+        }).on('expand', '.array-begin, .object-begin', function(){
+            var $this = $(this);
+            $this.html($this.data('original-html')).addClass('expanded');
+            $this.siblings().show();
+        });
     }
 
     function getTypeOf(something) {

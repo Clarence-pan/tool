@@ -149,7 +149,10 @@ function send_request(){
             ajaxOptions.data = param;
             ajaxOptions.dataType = 'text';
         }
+    } else {
+        ajaxOptions.url = url;
     }
+
     console.log(" Start Ajax request. URL: %o with params: %o", url, ajaxOptions);
 
     do_ajax(ajaxOptions, function(text, elapsedTimeInSeconds){
@@ -215,17 +218,29 @@ function humanize_xhr_ready_state(readyState){
 }
 
 function on_got_output(response, request){
+    var base64 = null, json = null, jsonPretty = null;
     console.log("Raw output:: %o", {output: response.text});
     try{
-        var base64 = Base64.decode(response.text);
+        base64 = Base64.decode(response.text);
         console.log("Base64 decoded: %o", {base64: base64});
         try{
-            var json = parseJson(base64);
+            json = parseJson(base64);
             console.log("JSON: %o", {json: json});
-            var jsonPretty = formatJson(base64);
+            jsonPretty = JSON.stringify(json, null, ' ');
         }catch(e){
             console.log("Failed to decode json: %o", e);
             console.log(e.stack);
+        }
+
+        if (!json){
+            try{
+                json = parseJson(response.text);
+                console.log("JSON: %o", {json: json});
+                jsonPretty = JSON.stringify(json, null, ' ');
+            }catch(e){
+                console.log("Failed to decode json: %o", e);
+                console.log(e.stack);
+            }
         }
     }catch(e){
         console.log("Failed to decode base64: %o", e);
@@ -490,6 +505,39 @@ function escape_html(html){
 }
 
 $(function(){
+    // init expander
     $('h1,h2,h3,h4,h').initExpander(true);
+
+    // bind events
+    $('#sendBtn').on('click', send_request);
+    $('#splitUrlBtn').on('click', split_url);
+    $('#decodeBtn').on('click', decode_param);
+    $('#encodeBtn').on('click', encode_param);
+    $('#formatJsonBtn').on('click', format_json);
+    $('#undoBtn').on('click', undo_it);
+    $('#redoBtn').on('click', redo_it);
+
+    if (!localStorage.hasShownNotice){
+        showNotice().done(function(){
+            localStorage.hasShownNotice = true;
+        });
+    }
 });
+
+function showNotice(){
+    var notice = new EJS({url: 'notice.ejs'});
+    var $dialog = $(notice.render({}));
+    var dfd = $.Deferred();
+
+    $dialog.on('click', '.btn-ok', function(){
+        $dialog.remove();
+        dfd.resolve('ok');
+        return false;
+    });
+
+    $dialog.appendTo('body').show();
+
+    return dfd.promise();
+}
+
 

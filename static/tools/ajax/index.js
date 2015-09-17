@@ -241,8 +241,7 @@ function on_got_output(response, request){
     }, request);
 
     var $output = $('#output').html($('#log .log-item:first .response').html()).show();
-    $output.find('h3,h4').initExpander(true);
-    $output.find('h4:not(:first)').trigger('shrink');
+    initExpanderForLogItem($output);
 }
 
 /**
@@ -282,12 +281,16 @@ function render_and_prepend_log(data, opt) {
     });
 
     $logItem.prependTo('#log');
-    $logItem.find('h3,h4').initExpander(true);
-    $logItem.find('.response h4:not(:first)').trigger('shrink');
+    initExpanderForLogItem($logItem);
 
     if (opt && opt.jump){
         location.hash = '#' + uiLogItemId;
     }
+}
+
+function initExpanderForLogItem($logItem){
+    $logItem.find('h3,h4').initExpander(true);
+    $logItem.find('.response h4:not(:eq(1))').trigger('shrink');
 }
 
 function log_it(response, request){

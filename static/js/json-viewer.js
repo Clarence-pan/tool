@@ -50,7 +50,11 @@
             var target = e.data('expander-target');
             if (!target) {
                 target = e.nextUntil(tagName);
-                e.data('expander-target');
+                e.data('expander-target', target);
+            }
+
+            if (target.size() <= 0){
+                return;
             }
 
             var trigger = e;
@@ -64,19 +68,21 @@
             trigger.on('shrink', function () {
                 target.hide();
                 trigger.removeClass('expanded');
-            })
+            });
             trigger.on('toggle-expand', function () {
-                target.toggle();
-                trigger.toggleClass('expanded');
+                trigger.trigger(target.is(':visible') ? 'shrink' : 'expand');
             });
             trigger.on('click', function () {
                 trigger.trigger('toggle-expand');
             });
             trigger.css({cursor: 'pointer'});
         });
+
         if (!defaultExpand) {
             triggers.trigger('shrink');
             $(triggers.toArray().slice(0, 3)).trigger('expand');
+        } else {
+            triggers.trigger('expand');
         }
     }
 

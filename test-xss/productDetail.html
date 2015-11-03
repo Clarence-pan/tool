@@ -1,0 +1,60 @@
+<h1>派滋自拍神棍 手机神器</h1>
+<h2>派滋自拍神棍 手机神器</h2>
+<h4>派滋自拍神棍 手机神器</h4>
+<h5>派滋自拍神棍 手机神器</h5>
+<style>
+    /* 测试样式 */
+    h4, h5{
+        color: red;
+    }
+</style>
+<h3>测试XSS注入</h3>
+<script>
+  window.alert("注入1成功，获取到COOKIE："+document.cookie);
+</script>
+<img src="kakka.jpg" onerror="alert('注入2成功，获取到COOKIE：'+document.cookie)" />
+<a href="javascript:alert('注入3成功，获取到COOKIE：'+document.cookie)">点击获取cookie</a>
+<a href="#" onclick="alert('注入4成功，获取到COOKIE：'+document.cookie)">点击获取cookie</a>
+
+
+<h3>测试图片：</h3>
+ <img src="http://m2.tuniucdn.com/filebroker/cdn/snc/12/b9/12b9d30196375047582a27601dd36560_w800_h0_c0_t0_w400_h300_c1_t0.jpg" />
+
+<h3>测试Flash视频:</h3>
+<div id="item-flash"><embed type="application/x-shockwave-flash" src="http://cloud.video.taobao.com/play/u/1704342247/p/2/e/1/t/3/22807804.swf" width="480" height="388" id="itemFlashObject" name="itemFlashObject" quality="high" wmode="opaque" allowfullscreen="true" menu="false" flashvars="MMplayerType=PlugInn&amp;reservelt=false&amp;showplayinglogo=false"></div>
+
+<h3>测试格式化的段落</h3>
+<div class="para">软件上的<b>微笑捕捉</b>，<i>微笑抓拍</i>；<span style="color:red">硬件上对相机的手持特殊设计</span>等。2015年3月2日，全国政协十二届三次会议新闻发布会在人民大会堂举行。作为2015年全国两会首场新闻发布会，本次发布会吸引了来自境内外数百家媒体前来报道，为取得更好的拍摄效果，现场记者各施绝技，还有记者举起了近期流行的“<strong>自拍神器</strong>”，也引来了诸多媒体的关注<sup>[1]</sup><a
+        class="anchor-inline" name="ref_[1]_7996155">&nbsp;</a>。
+</div>
+<div id="testId">test ID</div>
+<h3><a href="http://baike.baidu.com/view/8085830.htm">测试链接</a></h3>
+
+<h3>测试表格</h3>
+<table>
+    <tr>
+        <td>测试</td>
+        <td>表头</td>
+    </tr>
+    <tr>
+        <td>测试</td>
+        <td>表</td>
+    </tr>
+    <tr>
+        <td>测试</td>
+        <td>表</td>
+    </tr>
+    <tr>
+        <td>测试</td>
+        <td>表</td>
+    </tr>
+    <tr>
+        <td>测试</td>
+        <td>表</td>
+    </tr>
+</table>
+
+<h3>测试iframe</h3>
+<iframe src="http://www.baidu.com"></iframe>
+
+

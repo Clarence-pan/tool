@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<script type="text/javascript" src="./jquery-1.9.0.js"></script>
+		<title>Test session problem</title>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#callSession').click(function(){
+					$('.blink').fadeOut(300).fadeIn(300);
+					$.ajax({
+						url: "server_session.php"
+					}).done(function(msg) {
+						console.log('Ajax request for session script done.');
+						console.log(msg);
+					});
+				});
+				$('#callNoSession').click(function(){
+					$('.blink').fadeOut(300).fadeIn(300);
+					$.ajax({
+						url: "server_no_session.php"
+					}).done(function(msg) {
+						console.log('Ajax request for no session script done.');
+						console.log(msg);
+					});
+				});
+				$('#callSessionRegenerateId').click(function(){
+					$('.blink').fadeOut(300).fadeIn(300);
+					$.ajax({
+						url: "session_regenerate_id.php"
+					}).done(function(msg) {
+						console.log('Ajax request for session regenerate id script done.');
+						console.log(msg);
+					});
+				});
+				$('#callSessionWriteClose').click(function(){
+					$('.blink').fadeOut(300).fadeIn(300);
+					$.ajax({
+						url: "session_write_close.php"
+					}).done(function(msg) {
+						console.log('Ajax request for session write close script done.');
+						console.log(msg);
+					});
+				});
+				$('#callSessionWriteCloseThenOpen').click(function(){
+					$('.blink').fadeOut(300).fadeIn(300);
+					$.ajax({
+						url: "session_write_close_then_open.php"
+					}).done(function(msg) {
+						console.log('Ajax request for session write close then open again script done.');
+						console.log(msg);
+					});
+				});	
+				$('#callGetSessionVar').click(function(){
+					$('.blink').fadeOut(300).fadeIn(300);
+					$.ajax({
+						url: "get_session_var.php"
+					}).done(function(msg) {
+						console.log('Ajax request for session write close then open again script done.');
+						console.log(msg);
+					});
+				});	
+
+			});
+
+		</script>
+	</head>
+
+	<body>
+		<p>We now -and it is not a new thing- develop applications depend on Ajax up to %100 But when a web page sends two or more Ajax requests you find them take mush time and maybe finish almost in the same time and here we are trying to test that problem.</p>
+
+		<p>Here we created two buttons call server side PHP scripts both have use sleep(5); but one of them have session_start(); and the other have not.</p>
+
+		<p>When you click the one without session may times, it will send many request to the server but the result will come with out blocking each other.</p>
+
+		<p>The other button the one calles file starts with session_start() which will lock the session file on the server for that user so each request made from that button will wait for the previous ones.</p>
+
+		<p class="blink">Check the console for result</p>
+
+		<p>More info in my blog post <a href="http://eslam.me/blog/php-session-locks-how-to-prevent-blocking-ajax-requests/">Does your Ajax requests take long time? it's PHP session locking problem</a>.</p>
+		
+		<button type="button" id="callNoSession">Call no Session</button>
+		<button type="button" id="callSession">Call Session</button>
+		<button type="button" id="callSessionRegenerateId">Call session regenerate id</button>
+		<button type="button" id="callSessionWriteClose">Call session write close</button>
+		<button type="button" id="callSessionWriteCloseThenOpen">Call session write close then open again</button>
+		<button type="button" id="callGetSessionVar">Call to get session var</button>
+		<br><br><br>
+		<a href="http://eslam.me">Created by Eslam Mahmoud</a>
+	</body>
+</html>

@@ -25,6 +25,9 @@ class ViewController extends Controller
 
             if (Yii::app()->request->getParam('toPhpArray')){
                 header('Content-Type: text/php;');
+                if (Yii::app()->request->getParam('sorted')){
+                    $json = sort_array_rec($json);
+                }
                 echo to_php_array($json);
             } else {
                 header('Content-Type: text/json;');
@@ -34,6 +37,18 @@ class ViewController extends Controller
             $this->render('index');
         }
     }
+}
+
+function sort_array_rec($arr){
+    ksort($arr);
+
+    foreach ($arr as &$item) {
+        if (is_array($item)){
+            $item = sort_array_rec($item);
+        }
+    }
+
+    return $arr;
 }
 
 // CVarDumper::dump() echos no comma. Let's add commas.

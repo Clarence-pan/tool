@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test GEO Location</title>
+    <style>
+        html{
+            font-size: large;
+        }
+        #location{
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <label id="location">Please refresh </label>
+    <button id="refresh">Refresh</button>
+    <script>
+        var $location = document.getElementById('location');
+        var $refresh = document.getElementById('refresh');
+
+        $refresh.addListener('click', function(){
+            updateLocation("updating...");
+            navigator.geolocation.getCurrentPosition(function(){
+                updateLocation("Success: \n" + JSON.stringify(arguments, '', ' '));
+            }, function(){
+                updateLocation("Failed: \n" + JSON.stringify(arguments, '', ' '));
+            });
+        }, {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        });
+
+        function updateLocation(text){
+            $location.innerText = text;
+        }
+    </script>
+</body>
+</html>

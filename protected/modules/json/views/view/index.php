@@ -29,10 +29,12 @@
 <form id="json-form" target="_blank" method="post" action="">
     <textarea id="data" name="data" placeholder="Please input json or php array..."></textarea>
     <input type="hidden" name="toPhpArray" value="0" />
+    <input type="hidden" name="sorted" value="1" />
     <button id="go-to-view" type="submit">Go To View</button>
     <button id="copy-btn" type="button">Copy</button>
     <button id="select-all-btn" type="button">Select All</button>
     <button id="to-php-array" type="button">To Php Array</button>
+    <button id="to-php-sorted-array" type="button">To Php Sorted Array</button>
 </form>
 <script type="text/javascript" src="/static/js/jquery.js"></script>
 <script type="text/javascript" src="/static/zeroclipboard/ZeroClipboard.js"></script>
@@ -76,6 +78,12 @@
             $('[name=toPhpArray]').val(1);
             $('#json-form').submit();
             $('[name=toPhpArray]').val(0);
+        });
+
+        $('#to-php-sorted-array').on('click', function(){
+            $('[name=toPhpArray],[name=sorted]').val(1);
+            $('#json-form').submit();
+            $('[name=toPhpArray],[name=sorted]').val(0);
         });
 
         ZeroClipboard.config( { swfPath: "/static/zeroclipboard/ZeroClipboard.swf" } );

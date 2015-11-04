@@ -201,7 +201,9 @@ var AjaxHistoryController = defClass({
         init: function(){
             this.ui = {
                 $content: $('#historyContent'),
-                $detail: $('#historyDetail')
+                $detail: $('#historyDetail'),
+                $export: $('#exportHistory'),
+                $download: $('#downloadHistory')
             };
             this.db = new IdBasedDbStore('log');
             this.bindEvents();
@@ -299,6 +301,39 @@ var AjaxHistoryController = defClass({
                 });
 
                 return false;
+            });
+
+            // export:
+            self.ui.$export.on('click', function(){
+                self.actionExportJson();
+                return false;
+            });
+        },
+        actionExportJson: function(){
+            var self = this;
+            var data = [];
+
+            self.ui.$download.hide();
+
+            self.db.each(function(historyItemData){
+                historyItemData = historyItemData || {};
+                historyItemData.request = historyItemData.request || {};
+                historyItemData.response = historyItemData.response || {};
+                data.push({
+                    id: historyItemData.id,
+                    request: {
+                        url: historyItemData.request.url,
+                        type: historyItemData.request.type
+                    },
+                    response: {
+                        raw: historyItemData.response.raw,
+                        elapsedTimeInSeconds: historyItemData.response.elapsedTimeInSeconds
+                    }
+                });
+            }).done(function(){
+                var blob = new Blob([JSON.stringify(data)]);
+                var url = window.URL.createObjectURL(blob);
+                self.ui.$download.attr('href', url).show();
             });
         },
         /**

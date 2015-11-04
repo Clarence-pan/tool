@@ -184,8 +184,23 @@ h4{
     display: block;
 }
 
-#historyTitle, #historyContent, #historyDetail{
-    background-color: #ededed
+
+#historyTitle, #historyContent, #historyDetail, #historyToolbar{
+    background-color: #ededed;
+}
+
+.btn{
+    display: inline-block;
+    background-color: #ededed;
+    color: #333;
+    border: 1px solid #777;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 0 1em;
+}
+
+.btn-info{
+    background-color: #aaaaFF;
 }
 
 #historyContent{

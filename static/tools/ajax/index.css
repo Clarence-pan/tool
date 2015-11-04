@@ -23,6 +23,21 @@ h4{
     font-size: 100%;
 }
 
+
+.btn{
+    display: inline-block;
+    background-color: #ededed;
+    color: #333;
+    border: 1px solid #777;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 0 1em;
+}
+
+.btn-info{
+    background-color: #aaaaFF;
+}
+
 #param{
     display: block;
     width: 100%;
@@ -186,21 +201,12 @@ h4{
 
 
 #historyTitle, #historyContent, #historyDetail, #historyToolbar{
+    clear: both;
     background-color: #ededed;
 }
 
-.btn{
-    display: inline-block;
-    background-color: #ededed;
-    color: #333;
-    border: 1px solid #777;
-    border-radius: 2px;
-    cursor: pointer;
-    padding: 0 1em;
-}
-
-.btn-info{
-    background-color: #aaaaFF;
+#historyToolbar .btn{
+    float: right;
 }
 
 #historyContent{
